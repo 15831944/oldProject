@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{977F2CF3-5CAD-489B-8CAB-D26D469DA9C1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ElectronTransferConsoleTest</RootNamespace>
+    <AssemblyName>ElectronTransferConsoleTest</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependency\oracle\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Aop, Version=2.0.0.35000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+<!--<<<<<<< .mine-->
+      <HintPath>..\dependency\Spring.NET\bin\net\3.5\release\Spring.Aop.dll</HintPath>
+<!--=======
+      <HintPath>..\dependency\Spring.NET\bin\net\3.5\debug\Spring.Aop.dll</HintPath>
+>>>>>>> .r1993-->
+    </Reference>
+    <Reference Include="Spring.Core, Version=2.0.0.35000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+<!--<<<<<<< .mine-->
+      <HintPath>..\dependency\Spring.NET\bin\net\3.5\release\Spring.Core.dll</HintPath>
+<!--=======
+      <HintPath>..\dependency\Spring.NET\bin\net\3.5\debug\Spring.Core.dll</HintPath>
+>>>>>>> .r1993-->
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConsoleLoggingAdvice.cs" />
+    <Compile Include="ConsoleLoggingThrowsAdvice.cs" />
+    <Compile Include="Interace1.cs" />
+    <Compile Include="ActiveJob.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ElectronTransferDal.Common\ElectronTransferDal.Common.csproj">
+      <Project>{22D68BC0-5BCA-484C-9AC9-E4360C072DAC}</Project>
+      <Name>ElectronTransferDal.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDal.OracleDal\ElectronTransferDal.OracleDal.csproj">
+      <Project>{AF11A077-FD7B-499B-8A92-DC69806957B0}</Project>
+      <Name>ElectronTransferDal.OracleDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDal.XmlDal\ElectronTransferDal.XmlDal.csproj">
+      <Project>{1AE47072-7982-4BA4-9E8B-BFED62A8A5C6}</Project>
+      <Name>ElectronTransferDal.XmlDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDAL\ElectronTransferDal.csproj">
+      <Project>{B19FCD50-C4EA-43AF-88CC-79D79E516772}</Project>
+      <Name>ElectronTransferDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferFramework\ElectronTransferFramework.csproj">
+      <Project>{823CEAC7-372E-4EEC-B47F-6AB86BD383A0}</Project>
+      <Name>ElectronTransferFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferModel\ElectronTransferModel.csproj">
+      <Project>{137B48A4-E97D-4D7D-801A-3D388BA702C6}</Project>
+      <Name>ElectronTransferModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Properties\app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

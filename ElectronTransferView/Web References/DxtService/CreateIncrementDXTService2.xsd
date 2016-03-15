@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" />
+  <xs:element name="YCreateDXT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ticketId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="YCreateDXTResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="YCreateDXTResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="YInchAdjustDXT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ticketId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isAdjust" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="YInchAdjustDXTResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="YInchAdjustDXTResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSchematicLineByTicketId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ticketId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isLoadToricNet" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSchematicLineByTicketIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="GetSchematicLineByTicketIdResult" nillable="true" type="q1:ArrayOfSchematicLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadUnSaveSchematicLine">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strFid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lttid" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadUnSaveSchematicLineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="LoadUnSaveSchematicLineResult" nillable="true" type="q2:SchematicLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="YAuditFaultDXT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="isSuccess" type="xs:boolean" />
+        <xs:element minOccurs="0" name="faultType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ticketId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="YAuditFaultDXTResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="YAuditFaultDXTResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendBackDXT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ticketId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendBackDXTResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendBackDXTResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PublishDXT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ticketId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PublishDXTResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PublishDXTResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveDXTAferInch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gisTicked" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="line" nillable="true" type="q3:SchematicLine" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="updateFeatures" nillable="true" type="q4:ArrayOfGisFeature" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveDXTAferInchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveDXTAferInchResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsReleasedDocuemntChanged">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="kxFid" type="xs:unsignedInt" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="version" nillable="true" type="q5:SchematicLineVersionInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsReleasedDocuemntChangedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsReleasedDocuemntChangedResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAdjustSchematiocLineList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="projectId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAdjustSchematiocLineListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="GetAdjustSchematiocLineListResult" nillable="true" type="q6:ArrayOfSchematicLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAdjustSchematicLines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="oldLine" nillable="true" type="q7:SchematicLine" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="newLine" nillable="true" type="q8:SchematicLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAdjustSchematicLinesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAdjustSchematicLinesResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="oldLine" nillable="true" type="q9:SchematicLine" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="newLine" nillable="true" type="q10:SchematicLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MergeDocumentIncrementWithCurrentReleasedDocuement">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="kxFid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="lttId" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MergeDocumentIncrementWithCurrentReleasedDocuementResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="MergeDocumentIncrementWithCurrentReleasedDocuementResult" nillable="true" type="q11:SchematicLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MigrateIncrementDataFromGt10ByGisTicketId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gisTicketId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MigrateIncrementDataFromGt10ByGisTicketIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MigrateIncrementDataFromGt10ByGisTicketIdResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HasUnReleaseDocument">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gcTicketId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HasUnReleaseDocumentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HasUnReleaseDocumentResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

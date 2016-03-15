@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="DisableTicket1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC_ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisableTicket1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DisableTicket1Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisableTicket3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FNOFIDS" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="gc_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DisableTicket3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DisableTicket3Result" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisableTicket2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FNOFIDS" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisableTicket2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DisableTicket2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckTickes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC_FNOFIDS" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckTickesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckTickesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OpenTicket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC_FNOFIDS" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="GC_UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GC_ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OpenTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OpenTicketResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PublishAppend">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC_ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PublishAppendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PublishAppendResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpLoadAppend">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AppendFile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GC_ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpLoadAppendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpLoadAppendResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownByKX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SSDW_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KX_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZYDY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GC_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SESSION_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FidFnoList" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownByKXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownByKXResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckDownState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SESSION_ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckDownStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckDownStateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownByFW">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Xmin" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Xmax" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Ymin" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Ymax" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZYDY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GC_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SESSION_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FidFnoList" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownByFWResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownByFWResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownByKXandFW">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SSDW_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KX_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZYDY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GC_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SESSION_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FidFnoList" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownByKXandFWResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownByKXandFWResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="fireEvent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="fireEventResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="endFireEvent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eventname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="endFireEventResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DisableTicket">
+        <s:complexType />
+      </s:element>
+      <s:element name="DisableTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DisableTicketResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DisableTicket1SoapIn">
+    <wsdl:part name="parameters" element="tns:DisableTicket1" />
+  </wsdl:message>
+  <wsdl:message name="DisableTicket1SoapOut">
+    <wsdl:part name="parameters" element="tns:DisableTicket1Response" />
+  </wsdl:message>
+  <wsdl:message name="DisableTicket3SoapIn">
+    <wsdl:part name="parameters" element="tns:DisableTicket3" />
+  </wsdl:message>
+  <wsdl:message name="DisableTicket3SoapOut">
+    <wsdl:part name="parameters" element="tns:DisableTicket3Response" />
+  </wsdl:message>
+  <wsdl:message name="DisableTicket2SoapIn">
+    <wsdl:part name="parameters" element="tns:DisableTicket2" />
+  </wsdl:message>
+  <wsdl:message name="DisableTicket2SoapOut">
+    <wsdl:part name="parameters" element="tns:DisableTicket2Response" />
+  </wsdl:message>
+  <wsdl:message name="CheckTickesSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckTickes" />
+  </wsdl:message>
+  <wsdl:message name="CheckTickesSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckTickesResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:OpenTicket" />
+  </wsdl:message>
+  <wsdl:message name="OpenTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:OpenTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="PublishAppendSoapIn">
+    <wsdl:part name="parameters" element="tns:PublishAppend" />
+  </wsdl:message>
+  <wsdl:message name="PublishAppendSoapOut">
+    <wsdl:part name="parameters" element="tns:PublishAppendResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpLoadAppendSoapIn">
+    <wsdl:part name="parameters" element="tns:UpLoadAppend" />
+  </wsdl:message>
+  <wsdl:message name="UpLoadAppendSoapOut">
+    <wsdl:part name="parameters" element="tns:UpLoadAppendResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownByKXSoapIn">
+    <wsdl:part name="parameters" element="tns:DownByKX" />
+  </wsdl:message>
+  <wsdl:message name="DownByKXSoapOut">
+    <wsdl:part name="parameters" element="tns:DownByKXResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckDownStateSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckDownState" />
+  </wsdl:message>
+  <wsdl:message name="CheckDownStateSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckDownStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownByFWSoapIn">
+    <wsdl:part name="parameters" element="tns:DownByFW" />
+  </wsdl:message>
+  <wsdl:message name="DownByFWSoapOut">
+    <wsdl:part name="parameters" element="tns:DownByFWResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownByKXandFWSoapIn">
+    <wsdl:part name="parameters" element="tns:DownByKXandFW" />
+  </wsdl:message>
+  <wsdl:message name="DownByKXandFWSoapOut">
+    <wsdl:part name="parameters" element="tns:DownByKXandFWResponse" />
+  </wsdl:message>
+  <wsdl:message name="fireEventSoapIn">
+    <wsdl:part name="parameters" element="tns:fireEvent" />
+  </wsdl:message>
+  <wsdl:message name="fireEventSoapOut">
+    <wsdl:part name="parameters" element="tns:fireEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="endFireEventSoapIn">
+    <wsdl:part name="parameters" element="tns:endFireEvent" />
+  </wsdl:message>
+  <wsdl:message name="endFireEventSoapOut">
+    <wsdl:part name="parameters" element="tns:endFireEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="DisableTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:DisableTicket" />
+  </wsdl:message>
+  <wsdl:message name="DisableTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:DisableTicketResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ElectronTransferServiceSoap">
+    <wsdl:operation name="DisableTicket1">
+      <wsdl:input message="tns:DisableTicket1SoapIn" />
+      <wsdl:output message="tns:DisableTicket1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket3">
+      <wsdl:input message="tns:DisableTicket3SoapIn" />
+      <wsdl:output message="tns:DisableTicket3SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket2">
+      <wsdl:input message="tns:DisableTicket2SoapIn" />
+      <wsdl:output message="tns:DisableTicket2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTickes">
+      <wsdl:input message="tns:CheckTickesSoapIn" />
+      <wsdl:output message="tns:CheckTickesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenTicket">
+      <wsdl:input message="tns:OpenTicketSoapIn" />
+      <wsdl:output message="tns:OpenTicketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PublishAppend">
+      <wsdl:input message="tns:PublishAppendSoapIn" />
+      <wsdl:output message="tns:PublishAppendSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpLoadAppend">
+      <wsdl:input message="tns:UpLoadAppendSoapIn" />
+      <wsdl:output message="tns:UpLoadAppendSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownByKX">
+      <wsdl:input message="tns:DownByKXSoapIn" />
+      <wsdl:output message="tns:DownByKXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckDownState">
+      <wsdl:input message="tns:CheckDownStateSoapIn" />
+      <wsdl:output message="tns:CheckDownStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownByFW">
+      <wsdl:input message="tns:DownByFWSoapIn" />
+      <wsdl:output message="tns:DownByFWSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownByKXandFW">
+      <wsdl:input message="tns:DownByKXandFWSoapIn" />
+      <wsdl:output message="tns:DownByKXandFWSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="fireEvent">
+      <wsdl:input message="tns:fireEventSoapIn" />
+      <wsdl:output message="tns:fireEventSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="endFireEvent">
+      <wsdl:input message="tns:endFireEventSoapIn" />
+      <wsdl:output message="tns:endFireEventSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket">
+      <wsdl:input message="tns:DisableTicketSoapIn" />
+      <wsdl:output message="tns:DisableTicketSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ElectronTransferServiceSoap" type="tns:ElectronTransferServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DisableTicket1">
+      <soap:operation soapAction="http://tempuri.org/DisableTicket1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket3">
+      <soap:operation soapAction="http://tempuri.org/DisableTicket3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket2">
+      <soap:operation soapAction="http://tempuri.org/DisableTicket2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTickes">
+      <soap:operation soapAction="http://tempuri.org/CheckTickes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenTicket">
+      <soap:operation soapAction="http://tempuri.org/OpenTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PublishAppend">
+      <soap:operation soapAction="http://tempuri.org/PublishAppend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpLoadAppend">
+      <soap:operation soapAction="http://tempuri.org/UpLoadAppend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownByKX">
+      <soap:operation soapAction="http://tempuri.org/DownByKX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDownState">
+      <soap:operation soapAction="http://tempuri.org/CheckDownState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownByFW">
+      <soap:operation soapAction="http://tempuri.org/DownByFW" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownByKXandFW">
+      <soap:operation soapAction="http://tempuri.org/DownByKXandFW" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fireEvent">
+      <soap:operation soapAction="http://tempuri.org/fireEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="endFireEvent">
+      <soap:operation soapAction="http://tempuri.org/endFireEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket">
+      <soap:operation soapAction="http://tempuri.org/DisableTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ElectronTransferServiceSoap12" type="tns:ElectronTransferServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DisableTicket1">
+      <soap12:operation soapAction="http://tempuri.org/DisableTicket1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket3">
+      <soap12:operation soapAction="http://tempuri.org/DisableTicket3" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket2">
+      <soap12:operation soapAction="http://tempuri.org/DisableTicket2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTickes">
+      <soap12:operation soapAction="http://tempuri.org/CheckTickes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenTicket">
+      <soap12:operation soapAction="http://tempuri.org/OpenTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PublishAppend">
+      <soap12:operation soapAction="http://tempuri.org/PublishAppend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpLoadAppend">
+      <soap12:operation soapAction="http://tempuri.org/UpLoadAppend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownByKX">
+      <soap12:operation soapAction="http://tempuri.org/DownByKX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDownState">
+      <soap12:operation soapAction="http://tempuri.org/CheckDownState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownByFW">
+      <soap12:operation soapAction="http://tempuri.org/DownByFW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownByKXandFW">
+      <soap12:operation soapAction="http://tempuri.org/DownByKXandFW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fireEvent">
+      <soap12:operation soapAction="http://tempuri.org/fireEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="endFireEvent">
+      <soap12:operation soapAction="http://tempuri.org/endFireEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableTicket">
+      <soap12:operation soapAction="http://tempuri.org/DisableTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ElectronTransferService">
+    <wsdl:port name="ElectronTransferServiceSoap" binding="tns:ElectronTransferServiceSoap">
+      <soap:address location="http://192.168.1.102/ElectronTransferService/ElectronTransferService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ElectronTransferServiceSoap12" binding="tns:ElectronTransferServiceSoap12">
+      <soap12:address location="http://192.168.1.102/ElectronTransferService/ElectronTransferService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

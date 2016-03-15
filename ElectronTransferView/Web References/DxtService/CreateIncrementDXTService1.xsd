@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.Windows.Media" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Windows.Media" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Media.Animation" />
+  <xs:complexType name="Color">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="A" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="B" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="G" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="R" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="ScA" type="xs:float" />
+      <xs:element minOccurs="0" name="ScB" type="xs:float" />
+      <xs:element minOccurs="0" name="ScG" type="xs:float" />
+      <xs:element minOccurs="0" name="ScR" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Color" nillable="true" type="tns:Color" />
+  <xs:complexType name="DashStyle">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.Windows.Media.Animation" base="q1:Animatable">
+        <xs:sequence>
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Dashes" nillable="true" type="q2:ArrayOfdouble" />
+          <xs:element minOccurs="0" name="Offset" type="xs:double" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DashStyle" nillable="true" type="tns:DashStyle" />
+</xs:schema>

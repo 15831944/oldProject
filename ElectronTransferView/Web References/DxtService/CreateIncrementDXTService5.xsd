@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel.RelationShip" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel.RelationShip" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" />
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="RelationShip">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" minOccurs="0" name="RelationShipFeature" nillable="true" type="q1:GisFeature" />
+      <xs:element minOccurs="0" name="RelationShipFid" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="RelationShipType" type="tns:RelationType" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="RelationShip" nillable="true" type="tns:RelationShip" />
+  <xs:simpleType name="RelationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ConnectionRelationShip">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ContainRelationShip">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OwningRelationShip">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RelationType" nillable="true" type="tns:RelationType" />
+  <xs:complexType name="OwningRelation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RelationShip">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="OwnerRelationList" nillable="true" type="tns:ArrayOfRelationShip" />
+          <xs:element minOccurs="0" name="_ownerRelationList" nillable="true" type="tns:ArrayOfRelationShip" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OwningRelation" nillable="true" type="tns:OwningRelation" />
+  <xs:complexType name="ArrayOfRelationShip">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RelationShip" nillable="true" type="tns:RelationShip" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRelationShip" nillable="true" type="tns:ArrayOfRelationShip" />
+  <xs:complexType name="ConnectionRelation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RelationShip">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ChildrenRelations" nillable="true" type="tns:ArrayOfConnectionRelation" />
+          <xs:element minOccurs="0" name="IsElectricity" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ParentRelations" nillable="true" type="tns:ArrayOfConnectionRelation" />
+          <xs:element minOccurs="0" name="_childrenRelations" nillable="true" type="tns:ArrayOfConnectionRelation" />
+          <xs:element minOccurs="0" name="_parentRelations" nillable="true" type="tns:ArrayOfConnectionRelation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConnectionRelation" nillable="true" type="tns:ConnectionRelation" />
+  <xs:complexType name="ArrayOfConnectionRelation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConnectionRelation" nillable="true" type="tns:ConnectionRelation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConnectionRelation" nillable="true" type="tns:ArrayOfConnectionRelation" />
+  <xs:complexType name="ContainRelation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RelationShip">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ContainRelationList" nillable="true" type="tns:ArrayOfConnectionRelation" />
+          <xs:element minOccurs="0" name="_containRelationList" nillable="true" type="tns:ArrayOfConnectionRelation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ContainRelation" nillable="true" type="tns:ContainRelation" />
+</xs:schema>
