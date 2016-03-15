@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Media" />
+  <xs:complexType name="ArrayOfSchematicLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SchematicLine" nillable="true" type="tns:SchematicLine" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSchematicLine" nillable="true" type="tns:ArrayOfSchematicLine" />
+  <xs:complexType name="SchematicLine">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Naming">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="CoordinateOrigin" type="q1:Point" />
+          <xs:element minOccurs="0" name="CoordinateSystem" type="tns:CoordinateSystem" />
+          <xs:element minOccurs="0" name="CurrentVersionInfo" nillable="true" type="tns:SchematicLineVersionInfo" />
+          <xs:element minOccurs="0" name="DetailID" type="xs:unsignedInt" />
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FeatureRelationShipDictionary" nillable="true" type="q2:ArrayOfKeyValueOfstringRelationShipomki2qCN" />
+          <xs:element minOccurs="0" name="FeederFid" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="GisFeatures" nillable="true" type="tns:ArrayOfGisFeature" />
+          <xs:element minOccurs="0" name="IsAdjustment" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsIncrementUpdate" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MaxX" type="xs:double" />
+          <xs:element minOccurs="0" name="MaxY" type="xs:double" />
+          <xs:element minOccurs="0" name="MinX" type="xs:double" />
+          <xs:element minOccurs="0" name="MinY" type="xs:double" />
+          <xs:element minOccurs="0" name="PowerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SchematicDocumentType" type="tns:SchematicDocumentType" />
+          <xs:element minOccurs="0" name="SubStation" nillable="true" type="tns:SubStation" />
+          <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VersionState" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SchematicLine" nillable="true" type="tns:SchematicLine" />
+  <xs:complexType name="Naming">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NameValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Naming" nillable="true" type="tns:Naming" />
+  <xs:simpleType name="CoordinateSystem">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Geographical" />
+      <xs:enumeration value="Schematic" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CoordinateSystem" nillable="true" type="tns:CoordinateSystem" />
+  <xs:complexType name="SchematicLineVersionInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Naming">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreateTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DocumentType" type="tns:SchematicDocumentType" />
+          <xs:element minOccurs="0" name="EditTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GisDetailID" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="IsPrimitive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LttID" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="ParentVersionName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SourceVersionCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VersionCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VersionDetailID" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="VersionDetailNumber" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="VersionState" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VersionStateDesc" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="feederFid" type="xs:unsignedInt" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SchematicLineVersionInfo" nillable="true" type="tns:SchematicLineVersionInfo" />
+  <xs:simpleType name="SchematicDocumentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="SingleLine">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">101</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Geographic">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">100</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ToricNet">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">103</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Dispatch">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">104</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SvgStation">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">105</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SerializationFile">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">106</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LowerVoltage">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">107</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SchematicDB">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">108</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TaiQu">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">110</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AmmeterBox">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">111</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OnceMap">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">112</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SchematicDocumentType" nillable="true" type="tns:SchematicDocumentType" />
+  <xs:complexType name="GisFeature">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Naming">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FeatureSpatialType" type="tns:FeatureSpatialType" />
+          <xs:element minOccurs="0" name="FeederFid" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="Fid" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="GisAttribute" nillable="true" type="tns:GisAttribute" />
+          <xs:element minOccurs="0" name="GisFeatureType" nillable="true" type="tns:GisFeatureType" />
+          <xs:element minOccurs="0" name="GisTopoNode" nillable="true" type="tns:GisTopoNode" />
+          <xs:element minOccurs="0" name="IsUpdateComponent" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LabelComponents" nillable="true" type="tns:ArrayOfLabelComponent" />
+          <xs:element minOccurs="0" name="OwnerFid" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="ShapeComponents" nillable="true" type="tns:ArrayOfShapeComponent" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GisFeature" nillable="true" type="tns:GisFeature" />
+  <xs:simpleType name="FeatureSpatialType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UnKnow" />
+      <xs:enumeration value="Point">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Line">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Area">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Label">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1024</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationShip">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2048</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="FeatureSpatialType" nillable="true" type="tns:FeatureSpatialType" />
+  <xs:complexType name="GisAttribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttributeID" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="出线编号" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="变电站ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="型号规格" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="截面积" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="所属单位" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="所属馈线" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="标注内容" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="生命周期" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="电压等级" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="第一个所属设备" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="第二个所属设备" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="设备Fid" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="设备名称" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="设备类型" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="设备编码" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="运行编号" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="配变类别" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="长度" type="xs:double" />
+      <xs:element minOccurs="0" name="额定容量" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GisAttribute" nillable="true" type="tns:GisAttribute" />
+  <xs:complexType name="GisFeatureType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Naming">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Fno" type="xs:unsignedInt" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GisFeatureType" nillable="true" type="tns:GisFeatureType" />
+  <xs:complexType name="GisTopoNode">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GisTopoNode" nillable="true" type="tns:GisTopoNode" />
+  <xs:complexType name="ArrayOfLabelComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LabelComponent" nillable="true" type="tns:LabelComponent" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLabelComponent" nillable="true" type="tns:ArrayOfLabelComponent" />
+  <xs:complexType name="LabelComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NotLineTypeShapeComponent">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GTechId" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="IsGTechLable" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LabelComponent" nillable="true" type="tns:LabelComponent" />
+  <xs:complexType name="NotLineTypeShapeComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ShapeComponent">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SymbolText" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NotLineTypeShapeComponent" nillable="true" type="tns:NotLineTypeShapeComponent" />
+  <xs:complexType name="ShapeComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Angle" type="xs:double" />
+      <xs:element minOccurs="0" name="Cid" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Cno" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ComponentStyle" nillable="true" type="tns:ComponentStyle" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="CoordinateOrigin" type="q3:Point" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="CoordinateScale" type="q4:Point" />
+      <xs:element minOccurs="0" name="IncrementType" type="tns:IncrementType" />
+      <xs:element minOccurs="0" name="LttId" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="NeedCoordinateConvert" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OwnSchematicLineName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OwnerGisFeatureFid" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="OwnerGisFeatureFno" type="xs:unsignedInt" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="SchematicPoints" nillable="true" type="q5:ArrayOfPoint" />
+      <xs:element minOccurs="0" name="UnAdjustment" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ShapeComponent" nillable="true" type="tns:ShapeComponent" />
+  <xs:complexType name="ComponentStyle">
+    <xs:sequence>
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/System.Windows.Media" minOccurs="0" name="Color" type="q6:Color" />
+      <xs:element minOccurs="0" name="LineStyle" nillable="true" type="tns:LineStyle" />
+      <xs:element minOccurs="0" name="SNO" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="StyleType" type="tns:StyleType" />
+      <xs:element minOccurs="0" name="TextStyle" nillable="true" type="tns:TextStyle" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ComponentStyle" nillable="true" type="tns:ComponentStyle" />
+  <xs:complexType name="LineStyle">
+    <xs:sequence>
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/System.Windows.Media" minOccurs="0" name="DashStyle" nillable="true" type="q7:DashStyle" />
+      <xs:element minOccurs="0" name="LineDashStyle" type="tns:LineDashStyle" />
+      <xs:element minOccurs="0" name="LineWidth" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LineStyle" nillable="true" type="tns:LineStyle" />
+  <xs:simpleType name="LineDashStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Dash" />
+      <xs:enumeration value="DashDot" />
+      <xs:enumeration value="DashDotDot" />
+      <xs:enumeration value="Dot" />
+      <xs:enumeration value="Solid" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LineDashStyle" nillable="true" type="tns:LineDashStyle" />
+  <xs:simpleType name="StyleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LineType" />
+      <xs:enumeration value="TextType" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StyleType" nillable="true" type="tns:StyleType" />
+  <xs:complexType name="TextStyle">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Alignment" type="tns:TextAlignment" />
+      <xs:element minOccurs="0" name="FontFamily" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FontSize" type="xs:double" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="WPFTextAlignment" type="q8:TextAlignment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TextStyle" nillable="true" type="tns:TextStyle" />
+  <xs:simpleType name="TextAlignment">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CenterCenter" />
+      <xs:enumeration value="CenterLeft" />
+      <xs:enumeration value="CenterRight" />
+      <xs:enumeration value="TopCenter">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TopLeft">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TopRight">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BottomCenter">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BottomLeft">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BottomRight">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TextAlignment" nillable="true" type="tns:TextAlignment" />
+  <xs:simpleType name="IncrementType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Insert" />
+      <xs:enumeration value="Update" />
+      <xs:enumeration value="Delete" />
+      <xs:enumeration value="ShapeUpdate" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="IncrementType" nillable="true" type="tns:IncrementType" />
+  <xs:complexType name="GisLineFeature">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GisFeature">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GisLineFeature" nillable="true" type="tns:GisLineFeature" />
+  <xs:complexType name="GisPointFeature">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GisFeature">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GisPointFeature" nillable="true" type="tns:GisPointFeature" />
+  <xs:complexType name="GisLabelFeature">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GisFeature">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GisLabelFeature" nillable="true" type="tns:GisLabelFeature" />
+  <xs:complexType name="PointComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NotLineTypeShapeComponent">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SymbolIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PointComponent" nillable="true" type="tns:PointComponent" />
+  <xs:complexType name="LineComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:LineTypeShapeComponent">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LineComponent" nillable="true" type="tns:LineComponent" />
+  <xs:complexType name="LineTypeShapeComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ShapeComponent">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LineTypeShapeComponent" nillable="true" type="tns:LineTypeShapeComponent" />
+  <xs:complexType name="AreaComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:LineTypeShapeComponent">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AreaComponent" nillable="true" type="tns:AreaComponent" />
+  <xs:complexType name="GisRelationShipVirtualFeature">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GisFeature">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GisRelationShipVirtualFeature" nillable="true" type="tns:GisRelationShipVirtualFeature" />
+  <xs:complexType name="GisRoomFeature">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GisFeature">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CoordinateIncludeGisFeatures" nillable="true" type="tns:ArrayOfGisFeature" />
+          <xs:element minOccurs="0" name="IncludeGisFeature" nillable="true" type="tns:ArrayOfGisFeature" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GisRoomFeature" nillable="true" type="tns:GisRoomFeature" />
+  <xs:complexType name="ArrayOfGisFeature">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GisFeature" nillable="true" type="tns:GisFeature" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGisFeature" nillable="true" type="tns:ArrayOfGisFeature" />
+  <xs:complexType name="ArrayOfShapeComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ShapeComponent" nillable="true" type="tns:ShapeComponent" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShapeComponent" nillable="true" type="tns:ArrayOfShapeComponent" />
+  <xs:complexType name="SubStation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Naming">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SubStation" nillable="true" type="tns:SubStation" />
+</xs:schema>

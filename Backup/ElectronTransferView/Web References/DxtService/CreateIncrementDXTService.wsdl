@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="CreateIncrementDXTService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel" />
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/OPSYS_Schematic.ServiceModel.RelationShip" />
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Media" />
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Media.Animation" />
+      <xsd:import schemaLocation="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Threading" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateIncrementDXTService_YCreateDXT_InputMessage">
+    <wsdl:part name="parameters" element="tns:YCreateDXT" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_YCreateDXT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:YCreateDXTResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_YInchAdjustDXT_InputMessage">
+    <wsdl:part name="parameters" element="tns:YInchAdjustDXT" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_YInchAdjustDXT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:YInchAdjustDXTResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_GetSchematicLineByTicketId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchematicLineByTicketId" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_GetSchematicLineByTicketId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchematicLineByTicketIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_LoadUnSaveSchematicLine_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadUnSaveSchematicLine" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_LoadUnSaveSchematicLine_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadUnSaveSchematicLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_YAuditFaultDXT_InputMessage">
+    <wsdl:part name="parameters" element="tns:YAuditFaultDXT" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_YAuditFaultDXT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:YAuditFaultDXTResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_SendBackDXT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendBackDXT" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_SendBackDXT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendBackDXTResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_PublishDXT_InputMessage">
+    <wsdl:part name="parameters" element="tns:PublishDXT" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_PublishDXT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PublishDXTResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_SaveDXTAferInch_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveDXTAferInch" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_SaveDXTAferInch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveDXTAferInchResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_IsReleasedDocuemntChanged_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsReleasedDocuemntChanged" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_IsReleasedDocuemntChanged_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsReleasedDocuemntChangedResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_GetAdjustSchematiocLineList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdjustSchematiocLineList" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_GetAdjustSchematiocLineList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdjustSchematiocLineListResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_GetAdjustSchematicLines_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdjustSchematicLines" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_GetAdjustSchematicLines_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdjustSchematicLinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_MergeDocumentIncrementWithCurrentReleasedDocuement_InputMessage">
+    <wsdl:part name="parameters" element="tns:MergeDocumentIncrementWithCurrentReleasedDocuement" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_MergeDocumentIncrementWithCurrentReleasedDocuement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MergeDocumentIncrementWithCurrentReleasedDocuementResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_MigrateIncrementDataFromGt10ByGisTicketId_InputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateIncrementDataFromGt10ByGisTicketId" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_MigrateIncrementDataFromGt10ByGisTicketId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MigrateIncrementDataFromGt10ByGisTicketIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_HasUnReleaseDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasUnReleaseDocument" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncrementDXTService_HasUnReleaseDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasUnReleaseDocumentResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CreateIncrementDXTService">
+    <wsdl:operation name="YCreateDXT">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/YCreateDXT" message="tns:CreateIncrementDXTService_YCreateDXT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/YCreateDXTResponse" message="tns:CreateIncrementDXTService_YCreateDXT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="YInchAdjustDXT">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/YInchAdjustDXT" message="tns:CreateIncrementDXTService_YInchAdjustDXT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/YInchAdjustDXTResponse" message="tns:CreateIncrementDXTService_YInchAdjustDXT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSchematicLineByTicketId">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/GetSchematicLineByTicketId" message="tns:CreateIncrementDXTService_GetSchematicLineByTicketId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/GetSchematicLineByTicketIdResponse" message="tns:CreateIncrementDXTService_GetSchematicLineByTicketId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadUnSaveSchematicLine">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/LoadUnSaveSchematicLine" message="tns:CreateIncrementDXTService_LoadUnSaveSchematicLine_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/LoadUnSaveSchematicLineResponse" message="tns:CreateIncrementDXTService_LoadUnSaveSchematicLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="YAuditFaultDXT">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/YAuditFaultDXT" message="tns:CreateIncrementDXTService_YAuditFaultDXT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/YAuditFaultDXTResponse" message="tns:CreateIncrementDXTService_YAuditFaultDXT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendBackDXT">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/SendBackDXT" message="tns:CreateIncrementDXTService_SendBackDXT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/SendBackDXTResponse" message="tns:CreateIncrementDXTService_SendBackDXT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PublishDXT">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/PublishDXT" message="tns:CreateIncrementDXTService_PublishDXT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/PublishDXTResponse" message="tns:CreateIncrementDXTService_PublishDXT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveDXTAferInch">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/SaveDXTAferInch" message="tns:CreateIncrementDXTService_SaveDXTAferInch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/SaveDXTAferInchResponse" message="tns:CreateIncrementDXTService_SaveDXTAferInch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsReleasedDocuemntChanged">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/IsReleasedDocuemntChanged" message="tns:CreateIncrementDXTService_IsReleasedDocuemntChanged_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/IsReleasedDocuemntChangedResponse" message="tns:CreateIncrementDXTService_IsReleasedDocuemntChanged_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdjustSchematiocLineList">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/GetAdjustSchematiocLineList" message="tns:CreateIncrementDXTService_GetAdjustSchematiocLineList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/GetAdjustSchematiocLineListResponse" message="tns:CreateIncrementDXTService_GetAdjustSchematiocLineList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdjustSchematicLines">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/GetAdjustSchematicLines" message="tns:CreateIncrementDXTService_GetAdjustSchematicLines_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/GetAdjustSchematicLinesResponse" message="tns:CreateIncrementDXTService_GetAdjustSchematicLines_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MergeDocumentIncrementWithCurrentReleasedDocuement">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/MergeDocumentIncrementWithCurrentReleasedDocuement" message="tns:CreateIncrementDXTService_MergeDocumentIncrementWithCurrentReleasedDocuement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/MergeDocumentIncrementWithCurrentReleasedDocuementResponse" message="tns:CreateIncrementDXTService_MergeDocumentIncrementWithCurrentReleasedDocuement_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MigrateIncrementDataFromGt10ByGisTicketId">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/MigrateIncrementDataFromGt10ByGisTicketId" message="tns:CreateIncrementDXTService_MigrateIncrementDataFromGt10ByGisTicketId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/MigrateIncrementDataFromGt10ByGisTicketIdResponse" message="tns:CreateIncrementDXTService_MigrateIncrementDataFromGt10ByGisTicketId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasUnReleaseDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/CreateIncrementDXTService/HasUnReleaseDocument" message="tns:CreateIncrementDXTService_HasUnReleaseDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/CreateIncrementDXTService/HasUnReleaseDocumentResponse" message="tns:CreateIncrementDXTService_HasUnReleaseDocument_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_CreateIncrementDXTService" type="tns:CreateIncrementDXTService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="YCreateDXT">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/YCreateDXT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="YInchAdjustDXT">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/YInchAdjustDXT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchematicLineByTicketId">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/GetSchematicLineByTicketId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadUnSaveSchematicLine">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/LoadUnSaveSchematicLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="YAuditFaultDXT">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/YAuditFaultDXT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendBackDXT">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/SendBackDXT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PublishDXT">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/PublishDXT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveDXTAferInch">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/SaveDXTAferInch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsReleasedDocuemntChanged">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/IsReleasedDocuemntChanged" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdjustSchematiocLineList">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/GetAdjustSchematiocLineList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdjustSchematicLines">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/GetAdjustSchematicLines" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MergeDocumentIncrementWithCurrentReleasedDocuement">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/MergeDocumentIncrementWithCurrentReleasedDocuement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MigrateIncrementDataFromGt10ByGisTicketId">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/MigrateIncrementDataFromGt10ByGisTicketId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasUnReleaseDocument">
+      <soap:operation soapAction="http://tempuri.org/CreateIncrementDXTService/HasUnReleaseDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CreateIncrementDXTService">
+    <wsdl:port name="BasicHttpBinding_CreateIncrementDXTService" binding="tns:BasicHttpBinding_CreateIncrementDXTService">
+      <soap:address location="http://192.168.1.102:801/CreateIncrementDXTService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

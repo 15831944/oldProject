@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd4" filename="CreateIncrementDXTService.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd1" filename="CreateIncrementDXTService0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd6" filename="CreateIncrementDXTService1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd0" filename="CreateIncrementDXTService2.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd7" filename="CreateIncrementDXTService3.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd3" filename="CreateIncrementDXTService4.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd5" filename="CreateIncrementDXTService5.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd2" filename="CreateIncrementDXTService6.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?disco" filename="CreateIncrementDXTService.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?wsdl" filename="CreateIncrementDXTService.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://192.168.1.102:801/CreateIncrementDXTService.svc?xsd=xsd8" filename="CreateIncrementDXTService7.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

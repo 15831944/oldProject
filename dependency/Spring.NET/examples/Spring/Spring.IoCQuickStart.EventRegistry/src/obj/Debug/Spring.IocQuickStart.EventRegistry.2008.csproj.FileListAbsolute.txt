@@ -1,0 +1,1 @@
+E:\source\Spring.NET\examples\Spring\Spring.IoCQuickStart.EventRegistry\src\bin\Debug\Spring.IocQuickStart.EventRegistry.exe.config

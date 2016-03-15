@@ -1,0 +1,1 @@
+E:\source\Spring.NET\examples\Spring\Spring.IoCQuickStart.AppContext\src\bin\Debug\Spring.IocQuickStart.AppContext.exe.config

@@ -1,0 +1,1357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{98A28F31-6529-41C1-9B9B-C2FD3D5D83E5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ElectronTransferView</RootNamespace>
+    <AssemblyName>ElectronTransferView</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;EnableLock1</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;EnableLock1</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="acdbmgd, Version=18.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependency\cad\acdbmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acmgd, Version=18.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependency\cad\acmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetARX, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependency\DOTNETARX\DotNetARX.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CADTimer.cs" />
+    <Compile Include="ContextMenuManager\CommonHelp.cs" />
+    <Compile Include="ContextMenuManager\DevAttribute.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\DevAttribute.Designer.cs">
+      <DependentUpon>DevAttribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\DFMCJLXG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\DFMCJLXG.Designer.cs">
+      <DependentUpon>DFMCJLXG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\JLBEditer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\JLBEditer.Designer.cs">
+      <DependentUpon>JLBEditer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\JLBMove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\JLBMove.Designer.cs">
+      <DependentUpon>JLBMove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\LabelManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\LabelManager.Designer.cs">
+      <DependentUpon>LabelManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\SHBMove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\SHBMove.Designer.cs">
+      <DependentUpon>SHBMove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\SDKXView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\SDKXView.Designer.cs">
+      <DependentUpon>SDKXView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\SHBMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\SHBMap.Designer.cs">
+      <DependentUpon>SHBMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\TaiZhangPalette.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\TaiZhangPalette.Designer.cs">
+      <DependentUpon>TaiZhangPalette.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\TJXG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\TJXG.Designer.cs">
+      <DependentUpon>TJXG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\ZXLabelForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\ZXLabelForm.Designer.cs">
+      <DependentUpon>ZXLabelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataManager\DataManagerHelper.cs" />
+    <Compile Include="dog.cs" />
+    <Compile Include="FunctionManager\AddLateral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\AddLateral.Designer.cs">
+      <DependentUpon>AddLateral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\BulkChanges.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\BulkChanges.Designer.cs">
+      <DependentUpon>BulkChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Command.cs" />
+    <Compile Include="ContextMenuManager\JLBMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\JLBMap.Designer.cs">
+      <DependentUpon>JLBMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\Measure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\Measure.Designer.cs">
+      <DependentUpon>Measure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\MergerIncrementXml.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\MergerIncrementXml.Designer.cs">
+      <DependentUpon>MergerIncrementXml.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\ModifyFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\ModifyFrom.Designer.cs">
+      <DependentUpon>ModifyFrom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\MoveSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\MoveSymbol.Designer.cs">
+      <DependentUpon>MoveSymbol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\XHGEManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\XHGEManagerForm.Designer.cs">
+      <DependentUpon>XHGEManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuHelper.cs" />
+    <Compile Include="SearchManager\CoordinateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\CoordinateForm.Designer.cs">
+      <DependentUpon>CoordinateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchManager\SearchHelper.cs" />
+    <Compile Include="SearchManager\SHBSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\SHBSearch.Designer.cs">
+      <DependentUpon>SHBSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SyncTZDataToGIS\SyncTzDataToCAD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SyncTZDataToGIS\SyncTzDataToCAD.Designer.cs">
+      <DependentUpon>SyncTzDataToCAD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SyncTZDataToGIS\TZTableValue.cs" />
+    <Compile Include="TopologyManager\SetColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TopologyManager\SetColor.Designer.cs">
+      <DependentUpon>SetColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TopologyManager\ConnectBySel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TopologyManager\ConnectBySel.Designer.cs">
+      <DependentUpon>ConnectBySel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TopologyManager\ConnectivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TopologyManager\ConnectivityForm.Designer.cs">
+      <DependentUpon>ConnectivityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TopologyManager\ConnectivityObject.cs" />
+    <Compile Include="TopologyManager\NodeObject.cs" />
+    <Compile Include="TopologyManager\SymbolObject.cs" />
+    <Compile Include="TopologyManager\ConnectManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TopologyManager\ConnectManager.Designer.cs">
+      <DependentUpon>ConnectManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TopologyManager\ConnectMxToYx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TopologyManager\ConnectMxToYx.Designer.cs">
+      <DependentUpon>ConnectMxToYx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\AnalysisManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\AnalysisManager.Designer.cs">
+      <DependentUpon>AnalysisManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\Option.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\Option.Designer.cs">
+      <DependentUpon>Option.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchManager\CoordinateFix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\CoordinateFix.Designer.cs">
+      <DependentUpon>CoordinateFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataManager\CadDataSource.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataManager\CadDataSource.Designer.cs">
+      <DependentUpon>CadDataSource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="FunctionManager\CustomSymbolSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\CustomSymbolSet.Designer.cs">
+      <DependentUpon>CustomSymbolSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoGenerationHelper.cs" />
+    <Compile Include="DevEventHandler.cs" />
+    <Compile Include="SearchManager\DeviceGridView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\DeviceGridView.Designer.cs">
+      <DependentUpon>DeviceGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\FeederEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\FeederEditor.Designer.cs">
+      <DependentUpon>FeederEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\FeederManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\FeederManagement.Designer.cs">
+      <DependentUpon>FeederManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchManager\FixedPosition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\FixedPosition.Designer.cs">
+      <DependentUpon>FixedPosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ILockDaemon.cs" />
+    <Compile Include="SearchManager\FixEntity.cs" />
+    <Compile Include="SearchManager\MultilineInPut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\MultilineInPut.Designer.cs">
+      <DependentUpon>MultilineInPut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchManager\WorkOrderRangeOfEntity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\WorkOrderRangeOfEntity.Designer.cs">
+      <DependentUpon>WorkOrderRangeOfEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TopologyManager\TraceManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TopologyManager\TraceManager.Designer.cs">
+      <DependentUpon>TraceManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Upload\UploadCAD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Upload\UploadCAD.Designer.cs">
+      <DependentUpon>UploadCAD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VerifyManager\WorkOrderVerify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerifyManager\WorkOrderVerify.Designer.cs">
+      <DependentUpon>WorkOrderVerify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewManager\LayerManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewManager\LayerManage.Designer.cs">
+      <DependentUpon>LayerManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LockDaemon.cs" />
+    <Compile Include="Menu\MenuControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuControl.Designer.cs">
+      <DependentUpon>MenuControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewManager\PanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewManager\PanelControl.Designer.cs">
+      <DependentUpon>PanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewManager\PreviewSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewManager\PreviewSymbol.Designer.cs">
+      <DependentUpon>PreviewSymbol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NetLoad.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SearchManager\Query.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\Query.designer.cs">
+      <DependentUpon>Query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\RegionalEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\RegionalEditor.Designer.cs">
+      <DependentUpon>RegionalEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionManager\RegionalManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionManager\RegionalManagement.Designer.cs">
+      <DependentUpon>RegionalManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\SHBEditer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\SHBEditer.Designer.cs">
+      <DependentUpon>SHBEditer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SenseLock.cs" />
+    <Compile Include="SearchManager\SpecialDeviceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchManager\SpecialDeviceList.Designer.cs">
+      <DependentUpon>SpecialDeviceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuManager\SwitchCabinetManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContextMenuManager\SwitchCabinetManage.designer.cs">
+      <DependentUpon>SwitchCabinetManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewManager\ViewHelper.cs" />
+    <Compile Include="ViewManager\ViewManagerHelper.cs" />
+    <Compile Include="WaitingSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitingSplash.Designer.cs">
+      <DependentUpon>WaitingSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\CadService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\DxtService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArxMap\ArxMap.csproj">
+      <Project>{0DF46ADA-1B6C-4B7E-894A-0BC40065EB20}</Project>
+      <Name>ArxMap</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CYZFramework\CYZFramework.csproj">
+      <Project>{180C785A-F25D-473A-811A-AB79910E7059}</Project>
+      <Name>CYZFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferBLL\ElectronTransferBll.csproj">
+      <Project>{162EA434-CAAE-420D-B3D1-7B98083901BB}</Project>
+      <Name>ElectronTransferBll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDal.Common\ElectronTransferDal.Common.csproj">
+      <Project>{22D68BC0-5BCA-484C-9AC9-E4360C072DAC}</Project>
+      <Name>ElectronTransferDal.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDal.XmlDal\ElectronTransferDal.XmlDal.csproj">
+      <Project>{1AE47072-7982-4BA4-9E8B-BFED62A8A5C6}</Project>
+      <Name>ElectronTransferDal.XmlDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDAL\ElectronTransferDal.csproj">
+      <Project>{B19FCD50-C4EA-43AF-88CC-79D79E516772}</Project>
+      <Name>ElectronTransferDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferFramework\ElectronTransferFramework.csproj">
+      <Project>{823CEAC7-372E-4EEC-B47F-6AB86BD383A0}</Project>
+      <Name>ElectronTransferFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferModel\ElectronTransferModel.csproj">
+      <Project>{137B48A4-E97D-4D7D-801A-3D388BA702C6}</Project>
+      <Name>ElectronTransferModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ContextMenuManager\DevAttribute.resx">
+      <DependentUpon>DevAttribute.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\DFMCJLXG.resx">
+      <DependentUpon>DFMCJLXG.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\JLBEditer.resx">
+      <DependentUpon>JLBEditer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\JLBMove.resx">
+      <DependentUpon>JLBMove.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\LabelManager.resx">
+      <DependentUpon>LabelManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\SHBMove.resx">
+      <DependentUpon>SHBMove.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\SDKXView.resx">
+      <DependentUpon>SDKXView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\SHBMap.resx">
+      <DependentUpon>SHBMap.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\TaiZhangPalette.resx">
+      <DependentUpon>TaiZhangPalette.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\TJXG.resx">
+      <DependentUpon>TJXG.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\ZXLabelForm.resx">
+      <DependentUpon>ZXLabelForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\AddLateral.resx">
+      <DependentUpon>AddLateral.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\BulkChanges.resx">
+      <DependentUpon>BulkChanges.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\JLBMap.resx">
+      <DependentUpon>JLBMap.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\Measure.resx">
+      <DependentUpon>Measure.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\MergerIncrementXml.resx">
+      <DependentUpon>MergerIncrementXml.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\ModifyFrom.resx">
+      <DependentUpon>ModifyFrom.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\MoveSymbol.resx">
+      <DependentUpon>MoveSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\XHGEManagerForm.resx">
+      <DependentUpon>XHGEManagerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\CoordinateForm.resx">
+      <DependentUpon>CoordinateForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\SHBSearch.resx">
+      <DependentUpon>SHBSearch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SyncTZDataToGIS\SyncTzDataToCAD.resx">
+      <DependentUpon>SyncTzDataToCAD.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopologyManager\ConnectBySel.resx">
+      <DependentUpon>ConnectBySel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopologyManager\ConnectivityForm.resx">
+      <DependentUpon>ConnectivityForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopologyManager\ConnectManager.resx">
+      <DependentUpon>ConnectManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopologyManager\ConnectMxToYx.resx">
+      <DependentUpon>ConnectMxToYx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\AnalysisManager.resx">
+      <DependentUpon>AnalysisManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\Option.resx">
+      <DependentUpon>Option.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\CoordinateFix.resx">
+      <DependentUpon>CoordinateFix.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataManager\CadDataSource.resx">
+      <DependentUpon>CadDataSource.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\CustomSymbolSet.resx">
+      <DependentUpon>CustomSymbolSet.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\DeviceGridView.resx">
+      <DependentUpon>DeviceGridView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\FeederEditor.resx">
+      <DependentUpon>FeederEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\FeederManagement.resx">
+      <DependentUpon>FeederManagement.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\FixedPosition.resx">
+      <DependentUpon>FixedPosition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\MultilineInPut.resx">
+      <DependentUpon>MultilineInPut.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\WorkOrderRangeOfEntity.resx">
+      <DependentUpon>WorkOrderRangeOfEntity.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopologyManager\SetColor.resx">
+      <DependentUpon>SetColor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopologyManager\TraceManager.resx">
+      <DependentUpon>TraceManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Upload\UploadCAD.resx">
+      <DependentUpon>UploadCAD.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerifyManager\WorkOrderVerify.resx">
+      <DependentUpon>WorkOrderVerify.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewManager\LayerManage.resx">
+      <DependentUpon>LayerManage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuControl.resx">
+      <DependentUpon>MenuControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewManager\PanelControl.resx">
+      <DependentUpon>PanelControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewManager\PreviewSymbol.resx">
+      <DependentUpon>PreviewSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\Query.resx">
+      <DependentUpon>Query.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\RegionalEditor.resx">
+      <DependentUpon>RegionalEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionManager\RegionalManagement.resx">
+      <DependentUpon>RegionalManagement.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\SHBEditer.resx">
+      <DependentUpon>SHBEditer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchManager\SpecialDeviceList.resx">
+      <DependentUpon>SpecialDeviceList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContextMenuManager\SwitchCabinetManage.resx">
+      <DependentUpon>SwitchCabinetManage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitingSplash.resx">
+      <DependentUpon>WaitingSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_0_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_0_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_10_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_10_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_1_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_1_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_2_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_2_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_3_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_3_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_4_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_4_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_5_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_5_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_6_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_7_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_8_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_8_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_9_0_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\146_9_1_10kV开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\147_0_站房电缆头.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\147_1_站房电缆头.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\148_0_变压器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\148_1_变压器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\148_2_变压器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\148_3_变压器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\148_4_变压器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\150_电缆中间接头.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\151_0_10kV电缆终端头.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\151_1_10kV电缆终端头.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\171_用户自带发电机.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\172_电动机.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\173_0_0_站房接地刀闸.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\173_0_1_站房接地刀闸.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\173_1_0_站房接地刀闸.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\173_1_1_站房接地刀闸.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\174_无功补偿柜.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\175_10kV断连.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\176_解断口.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\177_0_避雷器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\177_1_避雷器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\307_电压互感器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\309_高压电机.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\40_电流互感器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\71_穿墙套管.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\72_接地挂环.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\76_关口计量柜.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\84_0_计量柜.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\84_1_计量柜.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\中压设备\85_PT柜.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\155_0_0_低压开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\155_0_1_低压开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\155_1_0_低压开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\155_1_1_低压开关.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\158_低压电缆中间接头.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\159_0_低压集中抄表箱.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\159_1_低压集中抄表箱.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\159_2_低压集中抄表箱.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\169_0_低压电缆头.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\169_1_低压电缆头.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\73_低压断连.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\74_0_低压终端.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\低压设备\74_1_低压终端.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\构筑设备\201_0_杆塔.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\构筑设备\201_1_杆塔.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\构筑设备\201_2_杆塔.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\构筑设备\205_人井.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\构筑设备\215_低压电杆.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\构筑设备\218_低压支撑.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\180_FTU.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\181_配网仪.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\182_故障指示器.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\183_气压监测仪.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\184_油压监测仪.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\185_电压监测仪.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\186_路灯开关箱.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\188_负控.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\320_监视装置.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\86_电操机构.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="符号库\图元块\监测设备\90_DTU.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AutoCAD">
+      <Guid>{D32C213D-6096-40EF-A216-89A3A6FB82F7}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="AXDBLib">
+      <Guid>{9F83C3E8-AAA3-4B0B-A256-F0DF98DA74BC}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="符号库\图块图片\全部\140_10kV电缆.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\141_10kV导线.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\143_站房母线.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\144_站房引线.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\146_0_0_10kV开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\146_0_1_10kV开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\146_1_0_10kV开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\146_1_1_10kV开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\146_2_0_10kV开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\146_2_1_10kV开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\146_5_0_10kV开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\146_5_1_10kV开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\147_0_站房电缆头.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\148_0_变压器.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\148_2_农变.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\148_3_专改公.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\150_电缆中间接头.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\151_0_10kV电缆终端头.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\155_0_0_低压开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\155_空气开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\156_低压导线.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\157_低压电缆.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\158_低压电缆中间接头.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\159_0_低压集中抄表箱.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\165_10kV馈线开关.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\169_0_低压电缆头.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\171_用户自带发电机.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\172_电动机.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\174_无功补偿柜.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\175_10kV断连.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\176_解断口.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\180_FTU.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\181_TTU.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\182_故障指示器.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\201_0_杆塔.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\205_0_户外电缆终端头.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\211_杆塔支撑点.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\212_T接头.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\215_0_杆塔.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\221_1_接地刀闸.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\307_电压互感器.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\318_1_电缆终端头.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\320_监视装置.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\321_户内电容器.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\324_工井.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\385_负控监测.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\40_电流互感器.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\72_接地挂环.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\73_低压断连.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\75_低压变低出线.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\79_低压母线.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\80_低压表前线.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\82_高压表.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\84_0_计量柜.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\85_PT柜.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\CadService\ElectronTransferService.wsdl" />
+    <None Include="Web References\CadService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\DxtService\CreateIncrementDXTService.wsdl" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService.xsd" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService0.xsd" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService1.xsd" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService2.xsd" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService3.xsd" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService4.xsd" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService5.xsd" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService6.xsd" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService7.xsd" />
+    <None Include="Web References\DxtService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\DxtService\SchematicLine1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="符号库\图元块\中压设备\82_高压表.dwg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Resource\FID.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\loading_circle.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\zhsc.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\上游.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\下游.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\两点打断.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\删除节点.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\刷新.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\取消和打段.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\名称查询.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\坐标定位.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\复制.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\定位锁定框.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\打断于点.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\批量打段.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\旋转.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\母线建立.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\漫游.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\移动.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\自动连接.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\自定义图元.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\节点操作.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\设备定位.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\连选连接.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\重新绘制.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\镜像.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sense4.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Web References\CadService\ElectronTransferService.disco" />
+    <None Include="Web References\DxtService\CreateIncrementDXTService.disco" />
+    <Content Include="符号库\图块图片\全部\142_公用电房.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\149_箱式设备.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\163_专用电房.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\173_0_0_站房接地刀闸.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\177_0_避雷器.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\181_配网仪.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\183_气压监测仪.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\184_油压监测仪.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\185_电压监测仪.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\186_路灯开关箱.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\188_负控.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\198_开关柜.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\199_台架.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\205_人井.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\215_低压电杆.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\218_低压支撑.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\302_低压配电房.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\309_高压电机.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\71_穿墙套管.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\74_0_低压终端.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\76_关口计量柜.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\77_电缆分线箱.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\81_低压柜.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\86_电操机构.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="符号库\图块图片\全部\90_DTU.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://192.168.1.102/ElectronTransferService/ElectronTransferService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\CadService\</RelPath>
+      <UpdateFromURL>http://192.168.1.102/ElectronTransferService/ElectronTransferService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ElectronTransferView_CadService_ElectronTransferService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.1.102:801/CreateIncrementDXTService.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\DxtService\</RelPath>
+      <UpdateFromURL>http://192.168.1.102:801/CreateIncrementDXTService.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ElectronTransferView_DtxService_CreateIncrementDXTService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="符号库\图元块\自定义模版\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

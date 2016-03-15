@@ -1,0 +1,8 @@
+E:\source\Spring.NET\build\VS.Net.2008\Spring.Core\Debug\Spring.Core.dll
+E:\source\Spring.NET\build\VS.Net.2008\Spring.Core\Debug\Spring.Core.pdb
+E:\source\Spring.NET\build\VS.Net.2008\Spring.Core\Debug\Spring.Core.xml
+E:\source\Spring.NET\src\Spring\Spring.Core\obj\Debug\ResolveAssemblyReference.cache
+E:\source\Spring.NET\src\Spring\Spring.Core\obj\Debug\Spring.Resources.Strings.resources
+E:\source\Spring.NET\src\Spring\Spring.Core\obj\Debug\Spring.Core.2008.csproj.GenerateResource.Cache
+E:\source\Spring.NET\src\Spring\Spring.Core\obj\Debug\Spring.Core.dll
+E:\source\Spring.NET\src\Spring\Spring.Core\obj\Debug\Spring.Core.pdb

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{162EA434-CAAE-420D-B3D1-7B98083901BB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ElectronTransferBll</RootNamespace>
+    <AssemblyName>ElectronTransferBll</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="acdbmgd, Version=18.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependency\cad\acdbmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acmgd, Version=18.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependency\cad\acmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CABLEManager.cs" />
+    <Compile Include="CustomSymbol.cs" />
+    <Compile Include="DBCustomFinder.cs" />
+    <Compile Include="DBEntityHelper\AttributeCopy.cs" />
+    <Compile Include="DBEntityHelper\DeleteDBEntity.cs" />
+    <Compile Include="DBEntityHelper\InsertDBEntity.cs" />
+    <Compile Include="DBEntityHelper\UpdateDBEntity.cs" />
+    <Compile Include="EventHandlerHelper\InsertSymbolEventHandler.cs" />
+    <Compile Include="EventHandlerHelper\InsertToXmlEventHandler.cs" />
+    <Compile Include="MapManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register.cs" />
+    <Compile Include="EventHandlerHelper\SymbolEventHandler.cs" />
+    <Compile Include="EventHandlerHelper\VerifyRuleEventHandler.cs" />
+    <Compile Include="WindowsServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArxMap\ArxMap.csproj">
+      <Project>{0DF46ADA-1B6C-4B7E-894A-0BC40065EB20}</Project>
+      <Name>ArxMap</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDal.Common\ElectronTransferDal.Common.csproj">
+      <Project>{22D68BC0-5BCA-484C-9AC9-E4360C072DAC}</Project>
+      <Name>ElectronTransferDal.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDal.XmlDal\ElectronTransferDal.XmlDal.csproj">
+      <Project>{1AE47072-7982-4BA4-9E8B-BFED62A8A5C6}</Project>
+      <Name>ElectronTransferDal.XmlDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferDAL\ElectronTransferDal.csproj">
+      <Project>{B19FCD50-C4EA-43AF-88CC-79D79E516772}</Project>
+      <Name>ElectronTransferDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferFramework\ElectronTransferFramework.csproj">
+      <Project>{823CEAC7-372E-4EEC-B47F-6AB86BD383A0}</Project>
+      <Name>ElectronTransferFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronTransferModel\ElectronTransferModel.csproj">
+      <Project>{137B48A4-E97D-4D7D-801A-3D388BA702C6}</Project>
+      <Name>ElectronTransferModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZipExport\ZipExport.csproj">
+      <Project>{5AE02BCB-8297-43EE-8FEC-6CEE468AC2AE}</Project>
+      <Name>ZipExport</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

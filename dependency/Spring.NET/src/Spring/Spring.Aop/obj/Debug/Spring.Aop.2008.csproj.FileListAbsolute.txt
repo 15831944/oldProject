@@ -1,0 +1,6 @@
+E:\source\Spring.NET\build\VS.Net.2008\Spring.Aop\Debug\Spring.Aop.dll
+E:\source\Spring.NET\build\VS.Net.2008\Spring.Aop\Debug\Spring.Aop.pdb
+E:\source\Spring.NET\build\VS.Net.2008\Spring.Aop\Debug\Spring.Aop.xml
+E:\source\Spring.NET\src\Spring\Spring.Aop\obj\Debug\ResolveAssemblyReference.cache
+E:\source\Spring.NET\src\Spring\Spring.Aop\obj\Debug\Spring.Aop.dll
+E:\source\Spring.NET\src\Spring\Spring.Aop\obj\Debug\Spring.Aop.pdb
