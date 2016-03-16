@@ -1,0 +1,1128 @@
+在.net中序列化读写xml方法的总结
+http://www.cnblogs.com/fish-li/archive/2013/05/05/3061816.html#_label6
+阅读目录
+开始
+最简单的使用XML的方法
+类型定义与XML结构的映射
+使用 XmlElement
+使用 XmlAttribute
+使用 InnerText
+重命名节点名称
+列表和数组的序列化
+列表和数组的做为数据成员的序列化
+类型继承与反序列化
+反序列化的实战演练
+反序列化的使用总结
+排除不需要序列化的成员
+强制指定成员的序列化顺序
+自定义序列化行为
+序列化去掉XML命名空间及声明头
+XML的使用建议
+XML是一种很常见的数据保存方式，我经常用它来保存一些数据，或者是一些配置参数。 使用C#，我们可以借助.net framework提供的很多API来读取或者创建修改这些XML， 然而，不同人使用XML的方法很有可能并不相同。 今天我打算谈谈我使用XML的一些方法，供大家参考。
+
+回到顶部
+最简单的使用XML的方法
+由于.net framework针对XML提供了很多API，这些API根据不同的使用场景实现了不同层次的封装， 比如，我们可以直接使用XmlTextReader、XmlDocument、XPath来取数XML中的数据， 也可以使用LINQ TO XML或者反序列化的方法从XML中读取数据。 那么，使用哪种方法最简单呢？
+
+我个人倾向于使用序列化，反序列化的方法来使用XML。 采用这种方法，我只要考虑如何定义数据类型就可以了，读写XML各只需要一行调用即可完成。 例如：
+
+// 1. 首先要创建或者得到一个数据对象
+Order order = GetOrderById(123);
+
+
+// 2. 用序列化的方法生成XML
+string xml = XmlHelper.XmlSerialize(order, Encoding.UTF8);
+
+
+// 3. 从XML读取数据并生成对象
+Order order2 = XmlHelper.XmlDeserialize<Order>(xml, Encoding.UTF8);
+就是这么简单的事情，XML结构是什么样的，我根本不用关心， 我只关心数据是否能保存以及下次是否能将它们读取出来。
+
+说明：XmlHelper是一个工具类，全部源代码如下： 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Serialization;
+using System.IO;
+using System.Xml;
+
+// 此处代码来源于博客【在.net中读写config文件的各种方法】的示例代码
+// http://www.cnblogs.com/fish-li/archive/2011/12/18/2292037.html
+
+namespace MyMVC
+{
+    public static class XmlHelper
+    {
+        private static void XmlSerializeInternal(Stream stream, object o, Encoding encoding)
+        {
+            if( o == null )
+                throw new ArgumentNullException("o");
+            if( encoding == null )
+                throw new ArgumentNullException("encoding");
+
+            XmlSerializer serializer = new XmlSerializer(o.GetType());
+
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.NewLineChars = "\r\n";
+            settings.Encoding = encoding;
+            settings.IndentChars = "    ";
+
+            using( XmlWriter writer = XmlWriter.Create(stream, settings) ) {
+                serializer.Serialize(writer, o);
+                writer.Close();
+            }
+        }
+
+        /// <summary>
+        /// 将一个对象序列化为XML字符串
+        /// </summary>
+        /// <param name="o">要序列化的对象</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>序列化产生的XML字符串</returns>
+        public static string XmlSerialize(object o, Encoding encoding)
+        {
+            using( MemoryStream stream = new MemoryStream() ) {
+                XmlSerializeInternal(stream, o, encoding);
+
+                stream.Position = 0;
+                using( StreamReader reader = new StreamReader(stream, encoding) ) {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 将一个对象按XML序列化的方式写入到一个文件
+        /// </summary>
+        /// <param name="o">要序列化的对象</param>
+        /// <param name="path">保存文件路径</param>
+        /// <param name="encoding">编码方式</param>
+        public static void XmlSerializeToFile(object o, string path, Encoding encoding)
+        {
+            if( string.IsNullOrEmpty(path) )
+                throw new ArgumentNullException("path");
+
+            using( FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write) ) {
+                XmlSerializeInternal(file, o, encoding);
+            }
+        }
+
+        /// <summary>
+        /// 从XML字符串中反序列化对象
+        /// </summary>
+        /// <typeparam name="T">结果对象类型</typeparam>
+        /// <param name="s">包含对象的XML字符串</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>反序列化得到的对象</returns>
+        public static T XmlDeserialize<T>(string s, Encoding encoding)
+        {
+            if( string.IsNullOrEmpty(s) )
+                throw new ArgumentNullException("s");
+            if( encoding == null )
+                throw new ArgumentNullException("encoding");
+
+            XmlSerializer mySerializer = new XmlSerializer(typeof(T));
+            using( MemoryStream ms = new MemoryStream(encoding.GetBytes(s)) ) {
+                using( StreamReader sr = new StreamReader(ms, encoding) ) {
+                    return (T)mySerializer.Deserialize(sr);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 读入一个文件，并按XML的方式反序列化对象。
+        /// </summary>
+        /// <typeparam name="T">结果对象类型</typeparam>
+        /// <param name="path">文件路径</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>反序列化得到的对象</returns>
+        public static T XmlDeserializeFromFile<T>(string path, Encoding encoding)
+        {
+            if( string.IsNullOrEmpty(path) )
+                throw new ArgumentNullException("path");
+            if( encoding == null )
+                throw new ArgumentNullException("encoding");
+
+            string xml = File.ReadAllText(path, encoding);
+            return XmlDeserialize<T>(xml, encoding);
+        }
+    }
+}
+
+
+
+
+
+或许有人会说：我使用XPath从XML读取数据也很简单啊。
+我认为这种说法有一个限制条件：只需要从XML中读取少量的数据。
+如果要全部读取，用这种方法会写出一大堆的机械代码出来！ 所以，我非常反感用这种方法从XML中读取全部数据。
+
+回到顶部
+类型定义与XML结构的映射
+如果是一个新项目，我肯定会毫不犹豫的使用序列化和反序列化的方法来使用XML， 然而，有时在维护一个老项目时，面对一堆只有XML却没有与之对应的C#类型时， 我们就需要根据XML结构来逆向推导C#类型，然后才能使用序列化和反序列化的方法。 逆向推导的过程是麻烦的，不过，类型推导出来之后，后面的事情就简单多了。
+
+为了学会根据XML结构逆向推导类型，我们需要关注一下类型定义与XML结构的映射关系。
+注意：有时候我们也会考虑XML结构对于传输量及可阅读性的影响，所以关注一下XML也是有必要的。
+
+这里有一个XML文件，是我从Visual Sutdio的安装目录中找到的： 
+
+怎样用反序列化的方式来读取它的数据呢，我在博客的最后将给出完整的实现代码。
+现在，我们还是看一下这个XML有哪些特点吧。
+
+<LinkGroup ID="sites" Title="Venus Sites" Priority="1500">
+对于这个节点来说，它包含了三个数据项（属性）：ID，Title，Priority。 这样的LinkGroup节点有三个。
+类似的还有Glyph节点。
+
+<LItem URL="http://www.asp.net" LinkGroup="sites">ASP.NET Home Page</LItem>
+LItem节点除了与LinkGroup有着类似的数据（属性）之外，还包含着一个字符串：ASP.NET Home Page ， 这是另外一种数据的存放方式。
+
+另外，LinkGroup和LItem都允许重复出现，我们可以用数组或者列表（Array，List）来理解它们。
+
+我还发现一些嵌套关系：LinkGroup可以包含Glyph，Context包含着Links，Links又包含了多个LItem。
+不管如何嵌套，我发现数据都是包含在一个一个的XML节点中。
+
+如果用专业的单词来描述它们，我们可以将ID，Title，Priority这三个数据项称为 XmlAttribute， LItem，LinkGroup节点称为 XmlElement，”ASP.NET Home Page“出现的位置可以称为 InnerText。 基本上，XML就是由这三类数据组成。
+
+下面我来演示如何使用这三种数据项。
+
+回到顶部
+使用 XmlElement
+首先，我来定义一个类型：
+
+public class Class1
+{
+    public int IntValue { get; set; }
+
+    public string StrValue { get; set; }
+}
+下面是序列化与反序列的调用代码：
+
+Class1 c1 = new Class1 { IntValue = 3, StrValue = "Fish Li" };
+string xml = XmlHelper.XmlSerialize(c1, Encoding.UTF8);
+Console.WriteLine(xml);
+
+Console.WriteLine("---------------------------------------");
+
+Class1 c2 = XmlHelper.XmlDeserialize<Class1>(xml, Encoding.UTF8);
+Console.WriteLine("IntValue: " + c2.IntValue.ToString());
+Console.WriteLine("StrValue: " + c2.StrValue);
+运行结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<Class1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <IntValue>3</IntValue>
+    <StrValue>Fish Li</StrValue>
+</Class1>
+---------------------------------------
+IntValue: 3
+StrValue: Fish Li
+结果显示，IntValue和StrValue这二个属性生成了XmlElement。
+
+小结：默认情况下（不加任何Attribute），类型中的属性或者字段，都会生成XmlElement。
+
+回到顶部
+使用 XmlAttribute
+再来定义一个类型：
+
+public class Class2
+{
+    [XmlAttribute]
+    public int IntValue { get; set; }
+
+    [XmlElement]
+    public string StrValue { get; set; }
+}
+注意，我在二个属性上增加的不同的Attribute.
+
+下面是序列化与反序列的调用代码： 
+
+运行结果如下（我将结果做了换行处理）：
+
+<?xml version="1.0" encoding="utf-8"?>
+<Class2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        IntValue="3">
+    <StrValue>Fish Li</StrValue>
+</Class2>
+---------------------------------------
+IntValue: 3
+StrValue: Fish Li
+结果显示：
+1. IntValue 生成了XmlAttribute
+2. StrValue 生成了XmlElement（和不加[XmlElement]的效果一样，表示就是默认行为）。
+
+小结：如果希望类型中的属性或者字段生成XmlAttribute，需要在类型的成员上用[XmlAttribute]来指出。
+
+回到顶部
+使用 InnerText
+还是来定义一个类型：
+
+public class Class3
+{
+    [XmlAttribute]
+    public int IntValue { get; set; }
+
+    [XmlText]
+    public string StrValue { get; set; }
+}
+注意，我在StrValue上增加的不同的Attribute.
+
+下面是序列化与反序列的调用代码： 
+
+运行结果如下（我将结果做了换行处理）：
+
+<?xml version="1.0" encoding="utf-8"?>
+<Class3 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    IntValue="3">Fish Li</Class3>
+---------------------------------------
+IntValue: 3
+StrValue: Fish Li
+结果符合预期：StrValue属性在增加了[XmlText]之后，生成了一个文本节点（InnerText）
+
+小结：如果希望类型中的属性或者字段生成InnerText，需要在类型的成员上用[XmlText]来指出。
+
+回到顶部
+重命名节点名称
+看过前面几个示例，大家应该能发现：通过序列化得到的XmlElement和XmlAttribute都与类型的数据成员或者类型同名。 然而有时候我们可以希望让属性名与XML的节点名称不一样，那么就要使用【重命名】的功能了，请看以下示例：
+
+[XmlType("c4")]
+public class Class4
+{
+    [XmlAttribute("id")]
+    public int IntValue { get; set; }
+
+    [XmlElement("name")]
+    public string StrValue { get; set; }
+}
+序列化与反序列的调用代码前面已经多次看到，这里就省略它们了。
+运行结果如下（我将结果做了换行处理）：
+
+<?xml version="1.0" encoding="utf-8"?>
+<c4 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    id="3">
+    <name>Fish Li</name>
+</c4>
+---------------------------------------
+IntValue: 3
+StrValue: Fish Li
+看看输出结果中的红字粗体字，再看看类型定义中的三个Attribute的三个字符串参数，我想你能发现规律的。
+
+小结：XmlAttribute，XmlElement允许接受一个别名用来控制生成节点的名称，类型的重命名用XmlType来实现。
+
+回到顶部
+列表和数组的序列化
+继续看示例代码：
+
+Class4 c1 = new Class4 { IntValue = 3, StrValue = "Fish Li" };
+Class4 c2 = new Class4 { IntValue = 4, StrValue = "http://www.cnblogs.com/fish-li/" };
+
+// 说明：下面二行代码的输出结果是一样的。
+List<Class4> list = new List<Class4> { c1, c2 };
+//Class4[] list = new Class4[] { c1, c2 };
+
+string xml = XmlHelper.XmlSerialize(list, Encoding.UTF8);
+Console.WriteLine(xml);
+
+// 序列化的结果，反序列化一定能读取，所以就不再测试反序列化了。
+运行结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfC4 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <c4 id="3">
+        <name>Fish Li</name>
+    </c4>
+    <c4 id="4">
+        <name>http://www.cnblogs.com/fish-li/</name>
+    </c4>
+</ArrayOfC4>
+现在c4节点已经重复出现了，显然，是我们期待的结果。
+
+不过，ArrayOfC4，这个节点名看起来太奇怪了，能不能给它也重命名呢？
+继续看代码，我可以定义一个新的类型：
+
+// 二种Attribute都可以完成同样的功能。
+//[XmlType("c4List")]
+[XmlRoot("c4List")]
+public class Class4List : List<Class4> { }
+然后，改一下调用代码：
+
+Class4List list = new Class4List { c1, c2 };
+运行结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<c4List xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <c4 id="3">
+        <name>Fish Li</name>
+    </c4>
+    <c4 id="4">
+        <name>http://www.cnblogs.com/fish-li/</name>
+    </c4>
+</c4List>
+小结：数组和列表都能直接序列化，如果要重命名根节点名称，需要创建一个新类型来实现。
+
+回到顶部
+列表和数组的做为数据成员的序列化
+首先，还是定义一个类型：
+
+public class Root
+{
+    public Class3 Class3 { get; set; }
+
+    public List<Class2> List { get; set; }
+}
+序列化的调用代码：
+
+Class2 c1 = new Class2 { IntValue = 3, StrValue = "Fish Li" };
+Class2 c2 = new Class2 { IntValue = 4, StrValue = "http://www.cnblogs.com/fish-li/" };
+
+Class3 c3 = new Class3 { IntValue = 5, StrValue = "Test List" };
+
+Root root = new Root { Class3 = c3, List = new List<Class2> { c1, c2 } };
+
+string xml = XmlHelper.XmlSerialize(root, Encoding.UTF8);
+Console.WriteLine(xml);
+运行结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<Root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Class3 IntValue="5">Test List</Class3>
+    <List>
+        <Class2 IntValue="3">
+            <StrValue>Fish Li</StrValue>
+        </Class2>
+        <Class2 IntValue="4">
+            <StrValue>http://www.cnblogs.com/fish-li/</StrValue>
+        </Class2>
+    </List>
+</Root>
+假设这里需要为List和Class2的节点重命名，该怎么办呢？
+如果继续使用前面介绍的方法，是行不通的。
+
+下面的代码演示了如何重命名列表节点的名称：
+
+public class Root
+{
+    public Class3 Class3 { get; set; }
+
+    [XmlArrayItem("c2")]
+    [XmlArray("cccccccccccc")]
+    public List<Class2> List { get; set; }
+}
+序列化的调用代码与前面完全一样，得到的输出结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<Root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Class3 IntValue="5">Test List</Class3>
+    <cccccccccccc>
+        <c2 IntValue="3">
+            <StrValue>Fish Li</StrValue>
+        </c2>
+        <c2 IntValue="4">
+            <StrValue>http://www.cnblogs.com/fish-li/</StrValue>
+        </c2>
+    </cccccccccccc>
+</Root>
+想不想把cccccccccccc节点去掉呢（直接出现c2节点）？
+下面的类型定义方式实现了这个想法：
+
+public class Root
+{
+    public Class3 Class3 { get; set; }
+
+    [XmlElement("c2")]
+    public List<Class2> List { get; set; }
+}
+输出结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<Root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Class3 IntValue="5">Test List</Class3>
+    <c2 IntValue="3">
+        <StrValue>Fish Li</StrValue>
+    </c2>
+    <c2 IntValue="4">
+        <StrValue>http://www.cnblogs.com/fish-li/</StrValue>
+    </c2>
+</Root>
+小结：数组和列表都在序列化时，默认情况下会根据类型中的数据成员名称生成一个节点， 列表项会生成子节点，如果要重命名，可以使用[XmlArrayItem]和[XmlArray]来实现。 还可以直接用[XmlElement]控制不生成列表的父节点。
+
+回到顶部
+类型继承与反序列化
+列表元素可以是同一种类型，也可以不是同一种类型（某个类型的派生类）。
+例如下面的XML：
+
+<?xml version="1.0" encoding="utf-8"?>
+<XRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <List>
+        <x1 aa="1" bb="2" />
+        <x1 aa="3" bb="4" />
+        <x2>
+            <cc>ccccccccccc</cc>
+            <dd>dddddddddddd</dd>
+        </x2>
+    </List>
+</XRoot>
+想像一下，上面这段XML是通过什么类型得到的呢？
+
+答案如下（注意红色粗体部分）：
+
+public class XBase { }
+
+[XmlType("x1")]
+public class X1 : XBase
+{
+    [XmlAttribute("aa")]
+    public int AA { get; set; }
+
+    [XmlAttribute("bb")]
+    public int BB { get; set; }
+}
+
+[XmlType("x2")]
+public class X2 : XBase
+{
+    [XmlElement("cc")]
+    public string CC { get; set; }
+
+    [XmlElement("dd")]
+    public string DD { get; set; }
+}
+
+public class XRoot
+{
+    [XmlArrayItem(typeof(X1)),
+    XmlArrayItem(typeof(X2))]
+    public List<XBase> List { get; set; }
+}
+序列化代码：
+
+X1 x1a = new X1 { AA = 1, BB = 2 };
+X1 x1b = new X1 { AA = 3, BB = 4 };
+X2 x2 = new X2 { CC = "ccccccccccc", DD = "dddddddddddd" };
+XRoot root = new XRoot { List = new List<XBase> { x1a, x1b, x2 } };
+
+string xml = XmlHelper.XmlSerialize(root, Encoding.UTF8);
+Console.WriteLine(xml);
+小结：同时为列表成员指定多个[XmlArrayItem(typeof(XXX))]可实现多种派生类型混在一起输出。
+
+回到顶部
+反序列化的实战演练
+接下来，我们将根据前面介绍的知识点，用反序列化的方法来解析本文开头处贴出的那段XML： 
+
+那段XML的根元素是DynamicHelp，因此，我们需要定义一个类型，类名为DynamicHelp。
+再观察那段XML，它应该包含一个LinkGroup列表，和一个Context属性，所以可以这样定义这三个类型：
+
+public class DynamicHelp
+{
+    [XmlElement]
+    public List<LinkGroup> Groups { get; set; }
+
+    public Context Context { get; set; }
+}
+
+public class LinkGroup { }
+
+public class Context { }
+再来看LinkGroup，它包含三个数据成员，以及一个子节点：Glyph，因此可以这样定义它们：
+
+public class LinkGroup 
+{
+    [XmlAttribute]
+    public string ID { get; set; }
+    [XmlAttribute]
+    public string Title { get; set; }
+    [XmlAttribute]
+    public int Priority { get; set; }
+
+    public Glyph Glyph { get; set; }
+}
+
+public class Glyph
+{
+    [XmlAttribute]
+    public int Collapsed { get; set; }
+    [XmlAttribute]
+    public int Expanded { get; set; }
+}
+LItem节点也简单，它就包含了URL，LinkGroup和一个文本节点，因此可以这样定义它：
+
+public class LItem
+{
+    [XmlAttribute]
+    public string URL { get; set; }
+    [XmlAttribute]
+    public string LinkGroup { get; set; }
+
+    [XmlText]
+    public string Title { get; set; }
+}
+Context节点也不复杂，就只包含了一个LItem列表，因此可以这样定义它：
+
+public class Context 
+{
+    public List<LItem> Links { get; set; }
+}
+好了，类型都定义好了，再来试试反序列化：
+
+DynamicHelp help = XmlHelper.XmlDeserializeFromFile<DynamicHelp>("Links.xml", Encoding.UTF8);
+
+foreach( LinkGroup group in help.Groups )
+    Console.WriteLine("ID: {0}, Title: {1}, Priority: {2}, Collapsed: {3}, Expanded: {4}",
+        group.ID, group.Title, group.Priority, group.Glyph.Collapsed, group.Glyph.Expanded);
+
+foreach( LItem item in help.Context.Links )
+    Console.WriteLine("URL: {0}, LinkGroup: {1}, Title: {2}",
+        item.URL.Substring(0, 15), item.LinkGroup, item.Title);
+屏幕显示：
+
+未处理的异常:  System.InvalidOperationException: XML 文档(4, 2)中有错误。 
+---> System.InvalidOperationException: 不应有 
+<DynamicHelp xmlns='http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd'>。
+哦，抛异常了。
+别急，看看异常说什么。
+好像是在说命名空间不能识别。
+根据异常的描述，我还要修改一下DynamicHelp的定义，改成这样：
+
+[XmlRoot(Namespace = "http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd")]
+public class DynamicHelp
+再次运行，结果如下：
+
+ID: sites, Title: Venus Sites, Priority: 1500, Collapsed: 3, Expanded: 4
+ID: Venus Private Forums, Title: Venus Private Forums, Priority: 1400, Collapsed: 3, Expanded: 4
+ID: ASP.NET Forums, Title: ASP.NET 1.0 Public Forums, Priority: 1200, Collapsed: 3, Expanded: 4
+URL: http://www.asp., LinkGroup: sites, Title: Venus Home Page
+URL: http://www.asp., LinkGroup: sites, Title: ASP.NET Home Page
+URL: http://www.asp., LinkGroup: Venus Private Forums, Title: General Discussions
+URL: http://www.asp., LinkGroup: Venus Private Forums, Title: Feature Requests
+URL: http://www.asp., LinkGroup: Venus Private Forums, Title: Bug Reports
+URL: http://www.asp., LinkGroup: Venus Private Forums, Title: ASP.NET 2.0 Related issues
+URL: http://www.asp., LinkGroup: ASP.NET Forums, Title: Announcements
+URL: http://www.asp., LinkGroup: ASP.NET Forums, Title: Getting Started
+URL: http://www.asp., LinkGroup: ASP.NET Forums, Title: Web Forms
+小结：根据XML结构推导类型时，要保证类型的层次结构与XML匹配， 数据的存放方式可以通过[XmlElement]，[XmlAttribute]，[XmlText]方式来指出。
+
+回到顶部
+反序列化的使用总结
+如果XML是由类型序列化得到那的，那么反序列化的调用代码是很简单的，
+反之，如果要面对一个没有类型的XML，就需要我们先设计一个（或者一些）类型出来，
+这是一个逆向推导的过程，请参考以下步骤：
+1. 首先要分析整个XML结构，定义与之匹配的类型，
+2. 如果XML结构有嵌套层次，则需要定义多个类型与之匹配，
+3. 定义具体类型（一个层级下的XML结构）时，请参考以下表格。
+
+XML形式	处理方法	补充说明
+XmlElement	定义一个属性	属性名与节点名字匹配
+XmlAttribute	[XmlAttribute] 加到属性上	
+InnerText	[XmlText] 加到属性上	一个类型只能使用一次
+节点重命名	根节点：[XmlType("testClass")]
+元素节点：[XmlElement("name")]
+属性节点：[XmlAttribute("id")]
+列表子元素节点：[XmlArrayItem("Detail")]
+列表元素自身：[XmlArray("Items")]	
+回到顶部
+排除不需要序列化的成员
+默认情况下，类型的所有公开的数据成员（属性，字段）在序列化时都会被输出， 如果希望排除某些成员，可以用[XmlIgnore]来指出，例如：
+
+public class TestIgnore
+{
+    [XmlIgnore]    // 这个属性将不会参与序列化
+    public int IntValue { get; set; }
+
+    public string StrValue { get; set; }
+
+    public string Url;
+}
+序列化调用代码：
+
+TestIgnore c1 = new TestIgnore { IntValue = 3, StrValue = "Fish Li" };
+c1.Url = "http://www.cnblogs.com/fish-li/";
+
+string xml = XmlHelper.XmlSerialize(c1, Encoding.UTF8);
+Console.WriteLine(xml);
+输出结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<TestIgnore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Url>http://www.cnblogs.com/fish-li/</Url>
+    <StrValue>Fish Li</StrValue>
+</TestIgnore>
+回到顶部
+强制指定成员的序列化顺序
+前面的示例很奇怪，我明明先定义的StrValue，后定义的Url，可是在输出时的顺序并是我期望的。
+如果你希望控制序列化的输出顺序，可以参考下面的示例代码（注意红色粗体文字）：
+
+public class TestIgnore
+{
+    [XmlIgnore]    // 这个属性将不会参与序列化
+    public int IntValue { get; set; }
+
+    [XmlElement(Order = 1)]
+    public string StrValue { get; set; }
+
+    [XmlElement(Order = 2)]
+    public string Url;
+}
+最终的输出结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<TestIgnore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StrValue>Fish Li</StrValue>
+    <Url>http://www.cnblogs.com/fish-li/</Url>
+</TestIgnore>
+回到顶部
+自定义序列化行为
+由于种种原因，可能需要我们自己控制序列化和反序列化的过程， 对于这种需求， .net framework也是支持的，下面我来演示如何这个过程。
+
+假如我现在有这样的类型定义：
+
+public class TestClass
+{
+    public string StrValue { get; set; }
+
+    public List<int> List { get; set; }
+}
+
+public class ClassB1
+{
+    public TestClass Test { get; set; }
+}
+测试代码：
+
+TestClass test = new TestClass { StrValue = "Fish Li", List = new List<int> { 1, 2, 3, 4, 5 } };
+ClassB1 b1 = new ClassB1 { Test = test };
+
+string xml = XmlHelper.XmlSerialize(b1, Encoding.UTF8);
+Console.WriteLine(xml);
+
+Console.WriteLine("-----------------------------------------------------");
+
+ClassB1 b2 = XmlHelper.XmlDeserialize<ClassB1>(xml, Encoding.UTF8);
+Console.WriteLine("StrValue: " + b2.Test.StrValue);
+foreach( int n in b2.Test.List )
+    Console.WriteLine(n);
+此时程序的输出结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<ClassB1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Test>
+        <StrValue>Fish Li</StrValue>
+        <List>
+            <int>1</int>
+            <int>2</int>
+            <int>3</int>
+            <int>4</int>
+            <int>5</int>
+        </List>
+    </Test>
+</ClassB1>
+-----------------------------------------------------
+StrValue: Fish Li
+1
+2
+3
+4
+5
+现在我可能会想：TestClass这个类太简单了，但它输出的XML长度复杂了点，能不能再短小一点，让网络传输地更快呢？
+
+在这里，我想到了自定义序列化行为来实现，请看下面对TestClass的重新定义。
+
+public class TestClass : IXmlSerializable
+{
+    public string StrValue { get; set; }
+
+    public List<int> List { get; set; }
+
+    public System.Xml.Schema.XmlSchema GetSchema()
+    {
+        return null;
+    }
+
+    public void ReadXml(XmlReader reader)
+    {
+        StrValue = reader.GetAttribute("s");
+
+        string numbers = reader.ReadString();
+        if( string.IsNullOrEmpty(numbers) == false )
+            List = (from s in numbers.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    let n = int.Parse(s)
+                    select n).ToList();
+    }
+
+    public void WriteXml(XmlWriter writer)
+    {
+        writer.WriteAttributeString("s", StrValue);
+        writer.WriteString(string.Join(",", List.ConvertAll<string>(x => x.ToString()).ToArray()));
+    }
+}
+继续使用前面的测试代码，现在的输出结果如下：
+
+<?xml version="1.0" encoding="utf-8"?>
+<ClassB1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Test s="Fish Li">1,2,3,4,5</Test>
+</ClassB1>
+-----------------------------------------------------
+StrValue: Fish Li
+1
+2
+3
+4
+5
+很明显，现在的序列化结果要比以前的结果小很多。
+而且，测试代码中的反序列化的显示也表明，我们仍然可以通过反序列化来读取它。
+
+回到顶部
+序列化去掉XML命名空间及声明头
+在前面的示例中，我们会发现有时很简单的XML在加了命名空间及声明头以后，结构变复杂了，内容也变长了。 有些人看到它们可能总是感觉非常别扭，例如：
+
+<?xml version="1.0" encoding="utf-8"?>
+<ClassB1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Test s="Fish Li">1,2,3,4,5</Test>
+</ClassB1>
+能不能只显示成下面这样呢？
+
+<ClassB1>
+    <Test s="Fish Li">1,2,3,4,5</Test>
+</ClassB1>
+答案是肯定的，按下面的方法修改本文的示例代码：
+
+private static void XmlSerializeInternal(Stream stream, object o, Encoding encoding)
+{
+    if( o == null )
+        throw new ArgumentNullException("o");
+    if( encoding == null )
+        throw new ArgumentNullException("encoding");
+
+    XmlSerializer serializer = new XmlSerializer(o.GetType());
+
+    XmlWriterSettings settings = new XmlWriterSettings();
+    settings.Indent = true;
+    settings.NewLineChars = "\r\n";
+    settings.Encoding = encoding;
+    settings.IndentChars = "    ";
+
+    // 不生成声明头
+    settings.OmitXmlDeclaration = true;
+
+    // 强制指定命名空间，覆盖默认的命名空间。
+    XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+    namespaces.Add(string.Empty, string.Empty);
+
+    using( XmlWriter writer = XmlWriter.Create(stream, settings) ) {
+        serializer.Serialize(writer, o, namespaces);
+        writer.Close();
+    }
+}
+说明：去掉XML命名空间及声明头不影响反序列化。
+
+回到顶部
+XML的使用建议
+在服务端，C#代码中：
+1. 建议不用使用低级别的XML API来使用XML，除非你是在设计框架或者通用类库。
+2. 建议使用序列化、反序列化的方法来生成或者读取XML
+3. 当需要考虑使用XML时，先不要想着XML结构，先应该定义好数据类型。
+4. 列表节点不要使用[XmlElement]，它会让所有子节点【升级】，显得结构混乱。
+5. 如果希望序列化的XML长度小一点，可以采用[XmlAttribute]，或者指定一个更短小的别名。
+6. 不要在一个列表中输出不同的数据类型，这样的XML结构的可读性不好。
+7. 尽量使用UTF-8编码，不要使用GB2312编码。
+
+在客户端，JavaScript代码中，我不建议使用XML，而是建议使用JSON来代替XML，因为：
+1. XML文本的长度比JSON要长，会占用更多的网络传输时间（毕竟数据保存在服务端，所以传输是免不了的）
+2. 在JavaScritp中使用XML比较麻烦（还有浏览器的兼容问题），反而各种浏览器对JSON有非常好的支持。
+
+点击此处下载示例代码
+
+如果，您认为阅读这篇博客让您有些收获，不妨点击一下右下角的【推荐】按钮。
+如果，您希望更容易地发现我的新博客，不妨点击一下右下角的【关注 Fish Li】。
+因为，我的写作热情也离不开您的肯定支持。
+
+感谢您的阅读，如果您对我的博客所讲述的内容有兴趣，请继续关注我的后续博客，我是Fish Li 。
+
+分类: C#基础
+好文要顶 关注我 收藏该文  
+Fish Li
+关注 - 5
+粉丝 - 8643
+荣誉：推荐博客
++加关注
+关注 Fish Li
+439 5
+(请您对文章做出评价)
+推荐阅读：★ 写自己的ASP.NET MVC框架（上）     ★ 写自己的ASP.NET MVC框架（下）
+推荐阅读：★ ClownFish：比手写代码还快的通用数据访问层     ★ 各种AJAX方法的使用比较
+我的资源：★ 我的一些可供下载的资源列表
+« 上一篇：HttpContext.Current并非无处不在
+» 下一篇：ASP.NET常被忽视的一些细节
+posted on 2013-05-05 22:45 Fish Li 阅读(37379) 评论(179) 编辑 收藏
+< Prev1234
+
+发表评论
+   #151楼 2013-09-25 11:31 | 思想  
+有关于xml序列化的问题想请教,QQ 740871780 谢谢
+支持(0)反对(0)
+   #152楼[楼主] 2013-09-27 21:39 | Fish Li  
+@思想
+如果真是你测试的那个结果，我也没有办法。
+控制节点顺序的意义不大，除非你用序号的方式访问节点。
+支持(0)反对(0)
+   #153楼 2013-10-22 10:42 | 猪头猪头  
+<root>
+<a>xx</a>
+<b>
+<c></c>
+<d></d>
+<c></c>
+<d></d>
+</b>
+</root>
+鱼哥我想问下类似这个XML怎么反序列化
+支持(0)反对(0)
+   #154楼[楼主] 2013-11-02 21:29 | Fish Li  
+@猪头猪头
+这个真不难哦，建二个类就可以反序列化了。
+不要直接找我要答案，我只给方法，不给答案的。
+支持(0)反对(0)
+   #155楼 2013-11-03 13:09 | 猪头猪头  
+@Fish Li
+继承类吗，我做了，但是它外面的还是有一层包含的，达不到我的效果，但是我做的这个有json返回的，从Json就可以反序列，但是这个xml格式的，不行。
+<root>
+<a>xx</a>
+<b>
+<x>
+<c></c>
+<d></d>
+</x>
+<x>
+<c></c>
+<d></d>
+</x>
+</b>
+</root>
+支持(0)反对(0)
+   #156楼 2013-11-07 21:41 | GN_R  
+@Fish Li
+
+鱼哥 反序列化的实战演练中 在我这边类DynamicHelp的LinkGroup集合特性按文章这样写反序列化不了，我这边特性要这样写[XmlElement("LinkGroup")]才能出来。
+支持(1)反对(0)
+   #157楼 2013-11-29 09:46 | healthguo  
+收藏了
+支持(0)反对(0)
+   #158楼 2013-12-20 13:54 | Cassaba  
+请教一下<。)#)))≦兄， 如果某个对象的节点是枚举类型，如何控制序列化的结果为枚举的值还是枚举的显示名称呢？ 目前测试默认是显示名称，我的目的是想显示为值。Thanks!
+支持(0)反对(0)
+   #159楼 2014-01-14 19:25 | 梦醒心晴  
+你好，我用了你的xmlhelper从文件中反序列化出来一个类后，修改了类的属性，想再序列化到文件中，结果出了文件访问受限的异常，能告诉我是哪个地方占用了文件么？
+支持(0)反对(0)
+   #160楼 2014-01-22 14:03 | 王爱学志  
+膜拜,向大神学习了.感觉您写的XMLHelper帮助类,总是有Encoding这个参数,感觉有点别扭.就在您的代码上改了一下.采用一个静态属性.这样每个方法调用少了一个参数.
+修改后的XMLhelper.cs如下:
+支持(0)反对(0)
+   #161楼 2014-01-22 14:06 | 王爱学志  
+public static class XMLHelper
+{
+/// <summary>
+/// XML的编码方式,默认是UTF-8
+/// </summary>
+public static Encoding xmlEncode;
+/// <summary>
+/// 静态的构造函数,初始化此类
+/// </summary>
+static XMLHelper()
+{
+xmlEncode = Encoding.UTF8;
+}
+
+/// <summary>
+/// 将对象序列化为XML写入到流中
+/// </summary>
+/// <param name="stream">要写入的流</param>
+/// <param name="obj">被写入的对象</param>
+static void XmlSerializeInternal(Stream stream, Object obj)
+{
+//创建序列化对象,只有public的class才可以进行xml序列化
+XmlSerializer serialize = new XmlSerializer(obj.GetType());
+//创建写入对象
+XmlWriterSettings settings = new XmlWriterSettings();
+settings.Indent = true;/*表示缩进*/
+settings.IndentChars = " ";/*表示缩进的距离为一个Tab*/
+settings.NewLineChars = "\r\n";/*换行符,Window下换行符*/
+settings.Encoding = xmlEncode;/*编码方式*/
+//开始正式写入
+using (XmlWriter writer = XmlWriter.Create(stream, settings))
+{
+serialize.Serialize(writer, obj);
+}
+}
+
+/// <summary>
+/// 将对象序列化为xml并返回xml字符串
+/// </summary>
+/// <param name="obj">对象</param>
+/// <returns>序列化后的xml字符串</returns>
+public static String XmlSerializeFromString(Object obj)
+{
+//创建内存流对象
+using (MemoryStream stream = new MemoryStream())
+{
+//将对象以xml形式写入到内存流中
+XmlSerializeInternal(stream, obj);
+stream.Position = 0;/*设置流的的位置在开始处,以便我们可以从头读取,和stream.Seek(0, SeekOrigin.Begin);一样*/
+using (StreamReader reader = new StreamReader(stream, xmlEncode))
+{
+return reader.ReadToEnd();/*代码很花哨,几乎都是语法糖*/
+}
+}
+}
+
+/// <summary>
+/// 将对象按照xml序列化写入到文件中
+/// </summary>
+/// <param name="path">文件路径</param>
+/// <param name="obj">写入的对象</param>
+public static void XmlSerializeToFile(String path, Object obj)
+{
+//创建文件写入流对象
+using (FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write))
+{
+//写入将对象转成xml流的对象
+XmlSerializeInternal(file, obj);
+}
+}
+
+/// <summary>
+/// 将xml字符串转成对象
+/// </summary>
+/// <typeparam name="T">要转换的对象</typeparam>
+/// <param name="xmlStr">xml字符串</param>
+/// <returns>返回转换的对象</returns>
+public static T XmlDeserializeFromObject<T>(String xmlStr)
+{
+//以前刚学泛型时,就是感觉泛型好流弊,就是不明白这个词是什么意思.后来觉得模板更加贴切
+XmlSerializer serialize = new XmlSerializer(typeof(T));
+//创建内存流并进行转换
+using (MemoryStream stream = new MemoryStream(xmlEncode.GetBytes(xmlStr)))
+{
+//采用StreamReader是为了编码
+using (StreamReader reader = new StreamReader(stream, xmlEncode))
+{
+return (T)serialize.Deserialize(reader);
+}
+}
+}
+
+/// <summary>
+/// 将xml文件序列化为对象
+/// </summary>
+/// <typeparam name="T">泛型,待指定的类型</typeparam>
+/// <param name="path">文件绝对全路径字符串</param>
+/// <returns>返回对象</returns>
+public static T XmlDeserializeFromFile<T>(String path)
+{
+//创建xml反序列化对象
+XmlSerializer serialize = new XmlSerializer(typeof(T));
+//获取xml文件流,并反序列化转成对象并返回
+using (StreamReader reader = new StreamReader(path, xmlEncode))
+{
+return (T)serialize.Deserialize(reader);
+}
+}
+}
+支持(0)反对(0)
+   #162楼 2014-01-27 10:00 | -Murray-  
++ View Code
+
+这是我需要序列话的XML内容 
+
+下面是我对XML建立的数据类型
++ View Code
+
+
+我通过 
+PayPlatResponseParameter pay = XMLHelper.XmlDeserialize<PayPlatResponseParameter>(xmldata, Encoding.UTF8);
+
+去序列化 但是我发现 pay 的内容有几个 是null
+{Hnapay.RSATools.PayPlatResponseParameter}
+RESPONSE_CODE: null
+RESPONSE_DESC: "交易成功"
+RESPONSE_INFO: null
+RESULTDATESET: {Hnapay.RSATools.RESULTDATESET}
+SIGNVALUE: "18368eed4758622518712e2b975093a0265262492940dd65963a1002522e12bf0436a6a9c25c7a6b605f060a0a6e87b0af621deef62e25516a09fe235164ff1eedf837af5e6752d6792df4ad910cef5da9ab413f7b9c97baba7707f5390f0938fa4a44fbfba68c5ebd55e0577a01dcf4590e72d7248a754c32e93c66ca71749f"
+
+请问是怎么回事呢？谢谢！
+支持(0)反对(0)
+   #163楼 2014-02-15 18:01 | 心若彩虹  
+不很详细，不通俗易懂
+支持(0)反对(0)
+   #164楼 2014-02-20 11:59 | 梵哥  
+在使用XML与第三方进行数据交互的时候,对方一般会提供XML的XSD,在VS的命令行工具里可以用XSD.exe这个工具直接将XSD转成实体类,如敲入xsd d:\test.xsd /c /language:C# /outputdir:e:\这行命令就将D盘下名为test.xsd的文件转成了实体类保存在e盘下,这个工具也可以为XML生成对应的XSD.有些个XML文件结构是非常复杂的,用工具生成类比手工快很多.
+支持(0)反对(0)
+   #165楼 2014-03-10 15:41 | 摆脱菜鸟  
+详细而又全面，果断收藏！
+支持(0)反对(0)
+   #166楼 2014-03-22 22:02 | 梦在前方  
+能不能序列化我想要的数据啊。例如XML中的数据是这样的
+<Root>
+<Person id="1" name="aa"></Person>
+<Person id="2" name="bb"></Person>
+<Person id="3" name="cc"></Person>
+<Person id="4" name="dd"></Person>
+</Root>
+我想只把	<Person id="1" name="aa"></Person>
+<Person id="2" name="bb"></Person>序列化成对象。。
+支持(0)反对(0)
+   #167楼 2014-04-14 10:28 | 小钊  
+楼主你好！
+关于
+[XmlRoot(Namespace = "http://www.imsglobal.org/xsd/imscp_v1p1")]
+
+这种限制，能不能去掉啊 ，因为我现在解析一个xml文件 它的xmlns并不是确定的，但是里面的结构是一致的，请问有什么好的解决办法么？
+支持(0)反对(0)
+   #168楼 2014-05-13 11:25 | 鸡毛土人  
+谢谢，很详细，看着很好理解，博客园上面的文章质量不错。。。
+支持(0)反对(0)
+   #169楼 2014-07-31 20:44 | 奋斗中的小裤衩  
+博主您好，看到您的文章很受教。
+我遇到了一个问题想请教一下，我将一个Excel解析成xml文件，xml文件的属性都带有ss:这样的前缀，在反序列化的时候该如何处理呢？？例如如下xml文件的片段：
+
+<ss:Styles>
+  <ss:Style ss:ID="Default">
+   <ss:Alignment ss:Horizontal="Automatic" ss:Rotate="0.0" ss:Vertical="Center"
+    ss:ReadingOrder="Context"/>
+   <ss:Borders>
+   </ss:Borders>
+   <ss:Font ss:FontName="宋体" ss:Size="12" ss:Color="Automatic" ss:Bold="0"
+    ss:Italic="0" ss:Underline="None"/>
+   <ss:Interior ss:Color="Automatic" ss:Pattern="None"/>
+   <ss:NumberFormat ss:Format="General"/>
+   <ss:Protection ss:Protected="0"/>
+  </ss:Style>
+支持(0)反对(0)
+   #170楼 2014-09-29 08:50 | 眼圈黑黑  
+.xml文件可以转化为其架构文件.xsd
+.xsd文件可以转化为其对应的实体类
+以上都是可以通过工具自动生成的
+我们只关心序列化和反序列化的代码部分即可
+支持(0)反对(0)
+   #171楼 2014-12-17 15:30 | 摆脱菜鸟  
+学习！收藏！
+支持(0)反对(0)
+   #172楼 2015-01-22 11:18 | Elphly  
+学习了，在文件都没问题的时候非常不错，但如果还要验证一些数据的时候，这个输出的错误信息让用户看不懂。
+支持(0)反对(0)
+   #173楼 2015-02-03 23:27 | NewSea  
+写的好。
+支持(0)反对(0)
+   #174楼 2015-04-29 17:53 | 萧亚生  
+public class DynamicHelp
+{
+[XmlElement]
+public List<LinkGroup> Groups { get; set; }
+
+public Context Context { get; set; }
+}
+其中的[XmlElement]
+应该是
+[XmlElement("LinkGroup")]
+否则是反序列化不到Groups 的
+
